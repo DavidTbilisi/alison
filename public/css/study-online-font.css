@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "study-online";
+    src:url("fonts/study-online.eot");
+    src:url("fonts/study-online.eot?#iefix") format("embedded-opentype"),
+    url("fonts/study-online.woff") format("woff"),
+    url("fonts/study-online.ttf") format("truetype"),
+    url("fonts/study-online.svg#study-online") format("svg");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[data-icon]:before {
+    font-family: "study-online" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="study-"]:before,
+[class*=" study-"]:before {
+    font-family: "study-online" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.study-error:before {
+    content: "\61";
+}
+.study-paste:before {
+    content: "\62";
+}
+.study-trash:before {
+    content: "\63";
+}
+.study-edit:before {
+    content: "\64";
+}
+
+
