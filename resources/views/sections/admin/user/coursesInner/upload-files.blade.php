@@ -16,7 +16,7 @@
         <div class="modal-body">
             <div class="uploaded-list mCustomScrollbar scrollbar ">
                 <h1>კურსის მასალა</h1>
-                <form action="{{route('addlesson')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('lesson')}}" method="post" enctype="multipart/form-data">
                     <input type="text" placeholder="სათაური" name="name">
                     <input type="text" placeholder="აღწერა" name="desc">
                     <input type="file" id="upload" name="file">

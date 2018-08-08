@@ -197,6 +197,16 @@ select {
 }
 
 .course-navigation {
+  .topics_heading{
+    font-weight: bolder;
+  }
+  form{
+    input[type=submit]{
+      position: relative;
+      left:50%;
+      transform:translate(-50%);
+    }
+  }
   input[type="text"] {
     background: #d9dee294;
     outline: #2e394238 solid 2px;

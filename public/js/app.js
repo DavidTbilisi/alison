@@ -68,12 +68,12 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(3);
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 
 /**
@@ -108,11 +108,31 @@ module.exports = __webpack_require__(2);
         return {
             name: 'view',
             pasteBtn: $('span.pointer.icon.study-paste'),
-            delete: $('.ddel')
+            delete: $('.ddel'),
+            courseNavigation: '.course-navigation',
+            url: {
+                baseUrl: location.origin + "/alison/public",
+                routes: __webpack_require__(2)
+            }
         };
     }();
 
     var octopus = function (v) {
+
+        var route = function route() {
+            var args = Array.prototype.slice.call(arguments);
+            var name = args.shift();
+
+            if (v.url.routes[name] === undefined) {
+                console.error('Unknown route ', name);
+            } else {
+                return v.url.baseUrl + '/' + v.url.routes[name].split('/').map(function (s) {
+                    return s[0] == '{' ? args.shift() : s;
+                }).join('/');
+            }
+        };
+
+        console.log(route('editlesson', [2]));
 
         // Events
         v.pasteBtn.click(function (e) {
@@ -122,7 +142,26 @@ module.exports = __webpack_require__(2);
         });
 
         v.delete.click(function () {
+            v.currnetDel = $(this).parent().find("a");
+            v.currnetDelHref = $(v.currnetDel).attr('href');
+            v.currnetDelId = v.currnetDelHref.slice(-1);
+            v.deleteUrl = 2;
+            function del() {
+                jQuery.ajax({
+                    url: route('deletelesson', v.currnetDelId),
+                    method: 'post',
+                    data: { del: v.currnetDelId },
+                    success: function success(data) {
+                        var cnav = $(data).find(v.courseNavigation);
+                        $(v.courseNavigation).replaceWith(cnav);
+                        location.href = route('lesson');
+                    }
+                });
+            }
             var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
+            if (sure) {
+                del();
+            }
         });
 
         return {};
@@ -136,6 +175,12 @@ module.exports = __webpack_require__(2);
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

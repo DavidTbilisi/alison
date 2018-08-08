@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
@@ -297,33 +298,64 @@ class HomeController extends Controller
     }
     public function deleteCourse(Request $request)
     {
-            Courses::where("id",$request->id)->delete();
-            $scourses = ShortCourse::all();
-
+        Courses::where("id",$request->id)->delete();
         return redirect(route('dashboard'))->with('deleted','კურსი წარმატებით წაიშალა');
     }
 
-    public function addLesson($lesson_id = 0)
+    public function lesson($active = 0)
     {
-
-        $arrId = $lesson_id < 1 ? $lesson_id : $lesson_id - 1;
-        $lesson_id = $lesson_id < 1 ? 1 : $lesson_id;
-
+        // always 1 or above;
+         // $active = $active > 1 ? $active-- : $active;
+        $hasCurses = false;
         $resources = Resource::byUserId(session('user_id')); // ფაილები
-        $oneC = OneCourse::byUserId(session('user_id'), $lesson_id); // ტექსტიები
 
-//        dump($oneC[$arrId]);
+        if(OneCourse::where('id','>',0)->exists() ){     $hasCurses = true;   }
+
+        $oneC = OneCourse::byUserId(session('user_id')); // ტექსტიები
 
         return view('admin.user.courses.long.showcourse',
             [
                 'all'=>$this->all,
                 'resources'=>$resources,
                 'oneC' => $oneC,
-                'arrId' => $arrId
+                'active' => $active,
+                'hasCurses' => $hasCurses,
             ]
         );
     }
 
+    public function addLesson(Request $request)
+    {
+        $oneC = OneCourse::byUserId(session('user_id'));
+        $lesson = new OneCourse();
+        $lesson->title = $request->input('title');
+        $lesson->user_id = session('user_id');
+        $lesson->course_id = 1;
+        $lesson->position = 1;
+        $lesson->text = '';
+        $lesson->save();
+        return redirect(route('lesson'));
+    }
+    public function editLesson(Request $request)
+    {
+        if(isset($request->id)){} else $request->id = 0;
+
+        if($request->isMethod('post')){
+            $lesson = OneCourse::byUserId(session('user_id'));
+            $lesson[$request->id]->title = $request->input('title');
+            $lesson[$request->id]->text = $request->input('text');
+            $lesson[$request->id]->save();
+            return redirect(route('lesson',['id' => $request->id]));
+        }
+    }
+    public function deleteLesson(Request $request)
+    {
+        if(isset($request->id)){} else $request->id = 1;
+        if($request->isMethod('post')){
+            $lesson = OneCourse::byUserId(session('user_id'));
+            $lesson[$request->id]->delete();
+        }
+    }
 
 
     public function sendMail(Request $request)

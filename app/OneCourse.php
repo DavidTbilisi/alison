@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OneCourse extends Model
 {
-    public static function byUserId($id,$lesson_id)
+    public static function byUserId($id,$lesson_id = 0)
     {
         $course = OneCourse::where('user_id', $id);
-        if($lesson_id === 0) {$course ->where('id', $lesson_id);}
+        if($lesson_id !== 0) {
+            $course ->where('id', $lesson_id);
+        }
         return $course->orderBy('position','desc')->get();
     }
 
@@ -22,7 +24,7 @@ class OneCourse extends Model
         $course->save();
         return $course;
     }
-    public static function delLesson($id) {
+    public static function deleteLesson($id) {
         OneCourse::where('id',$id)->delete();
     }
 }

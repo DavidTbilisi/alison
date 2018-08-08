@@ -38,7 +38,11 @@ Route::group([ 'prefix' => '/admin', 'middleware' => 'MyAuth'], function(){
         Route::match(['get','post'],'/add',['as'=>'addcourse','uses'=>'HomeController@addCourse']); // addcourse
         Route::match(['get','post'],'/edit/{id}',['as'=>'edit','uses'=>'HomeController@editCourse']); // edit
         Route::match(['get','post'],'/delete/{id}',['as'=>'delete','uses'=>'HomeController@deleteCourse']); // delete
-        Route::match(['get','post'],'/addlesson/{id?}',['as' => 'addlesson', 'uses' => 'HomeController@addLesson']);
+
+        Route::match(['get','post'],'/lesson/{id?}',['as' => 'lesson', 'uses' => 'HomeController@lesson']);
+        Route::match(['get','post'],'/addlesson/',['as' => 'addlesson', 'uses' => 'HomeController@addLesson']);
+        Route::match(['get','post'],'/editlesson/{id?}',['as' => 'editlesson', 'uses' => 'HomeController@editLesson']);
+        Route::match(['get','post'],'/deletelesson/{id?}',['as' => 'deletelesson', 'uses' => 'HomeController@deleteLesson']);
     });
 });
 

@@ -1,3 +1,5 @@
+{{--@dump($oneC)--}}
+{{--@dump($active)--}}
 <div id="player-page">
     {{--<div class="player-page-bg"></div>--}}
     {{--<div class="wrapper breadcrumb-wrapper">--}}
@@ -5,26 +7,31 @@
     {{--</div>--}}
 
     <div class="player-page-wrapper wrapper ">
+        <form action="{{route("editlesson",['course_id,' => 5,'id' => request('id')])}}" method="post">
+
         <h1>
+{{-- თითო გაკვეთილის შიგთავსი --}}
             <span class="icon-courses"></span>
-            <input type="text" value="{{$oneC[$arrId]->title}}">
-            {{-- გაკვეთილის სათაური --}}
+
+            <input type="text" name="title" value="{{!$hasCurses? "": $oneC[$active]->title}}">
         </h1>
-        <div class="player-holder">
-            <form action="{{route('addlesson')}}" method="post">
-                {{-- გაკვეთილის ტექსტი --}}
-                <textarea class="tinymce"
-                          name="lesson"
-                          id="lesson">{{$oneC[$arrId]->text}}
-                </textarea>
+            <div class="player-holder">
 
-                {{ csrf_field() }}
+                    {{-- გაკვეთილის ტექსტი --}}
+                    <textarea class="tinymce"
+                              name="text"
+                              id="lesson">{{!$hasCurses? "": $oneC[$active]->text}}
+                    </textarea>
 
-                <input class="btn btn-green course-topic-add"
-                       type="submit"
-                       value="დამახსოვრება">
-            </form>
-        </div>
+{{-- todo: გაკვეთილები არ არის დამოკიდებული კურსზე --}}
+                    {{ csrf_field() }}
+
+                    <input class="btn btn-green course-topic-add"
+                           type="submit"
+                           value="დამახსოვრება">
+
+            </div>
+        </form>
         {{--მარჯვენა ნავიგაცია გაკვეთილებში --}}
         @include('sections.admin.user.coursesInner.course-navigation')
         @include('sections.admin.user.coursesInner.upload-files') {{--რესურსების გვერდი--}}

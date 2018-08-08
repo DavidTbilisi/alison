@@ -232,6 +232,17 @@ h6,
   color: var(--dark);
 }
 
+.course-navigation .topics_heading {
+  font-weight: bolder;
+}
+
+.course-navigation form input[type=submit] {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
 .course-navigation input[type="text"] {
   background: #d9dee294;
   outline: #2e394238 solid 2px;
