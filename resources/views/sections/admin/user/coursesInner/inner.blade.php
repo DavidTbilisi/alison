@@ -1,5 +1,5 @@
-{{--@dump($oneC)--}}
-{{--@dump($active)--}}
+@dump($oneC)
+@dump($active)
 <div id="player-page">
     {{--<div class="player-page-bg"></div>--}}
     {{--<div class="wrapper breadcrumb-wrapper">--}}
@@ -7,13 +7,15 @@
     {{--</div>--}}
 
     <div class="player-page-wrapper wrapper ">
-        <form action="{{route("editlesson",['course_id,' => 5,'id' => request('id')])}}" method="post">
+        <form action="{{route("editlesson",['id' => request('id')])}}" method="post">
 
         <h1>
 {{-- თითო გაკვეთილის შიგთავსი --}}
             <span class="icon-courses"></span>
 
-            <input type="text" name="title" value="{{!$hasCurses? "": $oneC[$active]->title}}">
+            <input type="text"
+                   name="title"
+                   value="{{!$hasCurses? "": $oneC[$active]->title}}">
         </h1>
             <div class="player-holder">
 

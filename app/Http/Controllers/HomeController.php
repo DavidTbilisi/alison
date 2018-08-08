@@ -302,16 +302,16 @@ class HomeController extends Controller
         return redirect(route('dashboard'))->with('deleted','კურსი წარმატებით წაიშალა');
     }
 
-    public function lesson($active = 0)
+    public function lesson($course_id,$active = 0)
     {
         // always 1 or above;
          // $active = $active > 1 ? $active-- : $active;
         $hasCurses = false;
         $resources = Resource::byUserId(session('user_id')); // ფაილები
 
-        if(OneCourse::where('id','>',0)->exists() ){     $hasCurses = true;   }
+        if(OneCourse::where('id','>',0)->where('course_id',$course_id)->exists() ){     $hasCurses = true;   }
 
-        $oneC = OneCourse::byUserId(session('user_id')); // ტექსტიები
+        $oneC = OneCourse::byUserId(session('user_id'),$course_id); // ტექსტიები
 
         return view('admin.user.courses.long.showcourse',
             [
@@ -320,17 +320,18 @@ class HomeController extends Controller
                 'oneC' => $oneC,
                 'active' => $active,
                 'hasCurses' => $hasCurses,
+                'course_id' => $course_id,
             ]
         );
     }
 
-    public function addLesson(Request $request)
+    public function addLesson($course_id,Request $request)
     {
         $oneC = OneCourse::byUserId(session('user_id'));
         $lesson = new OneCourse();
         $lesson->title = $request->input('title');
         $lesson->user_id = session('user_id');
-        $lesson->course_id = 1;
+        $lesson->course_id = $course_id;
         $lesson->position = 1;
         $lesson->text = '';
         $lesson->save();

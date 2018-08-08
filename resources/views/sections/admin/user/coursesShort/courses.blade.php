@@ -27,7 +27,7 @@
                     @endif
                 </td>
                 <td><p>{{$scours->name}}</p></td>
-                <td><a href="{{route('lesson')}}" class="btn btn-green">გაკვეთილები ({{$i}})</a></td>
+                <td><a href="{{route('lesson',[$scours->id])}}" class="btn btn-green">გაკვეთილები ({{$i}})</a></td>
                 <td><a class="btn btn-blue" href="{{route('edit',$scours->id )}}">კონფიგურაცია</a></td>
                 <td><a class="btn btn-danger" href="{{route('delete',$scours->id )}}">წაშლა</a></td>
             </tr>

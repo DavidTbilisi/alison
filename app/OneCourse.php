@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class OneCourse extends Model
 {
-    public static function byUserId($id,$lesson_id = 0)
+    public static function byUserId($id,$course_id=0,$lesson_id = 0)
     {
+
+        dump('user_id:',$id);
+        dump('course_id:',$course_id);
         $course = OneCourse::where('user_id', $id);
-        if($lesson_id !== 0) {
-            $course ->where('id', $lesson_id);
-        }
+        $lesson_id !== 0? $course->where('id', $lesson_id):'';
+        $course_id !== 0? $course->where('course_id', $course_id) :'';
         return $course->orderBy('position','desc')->get();
     }
 

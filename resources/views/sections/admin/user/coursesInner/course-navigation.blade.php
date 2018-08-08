@@ -13,13 +13,13 @@
                 {{-- რომელი გაკვეთილია გახსნილი --}}
                 @if($index == $active)
                     <li class="active">
-                        <a href="{{route('lesson', [ 'id' => $index])}}">{{$one->title}}</a>
+                        <a href="{{route('lesson', ['course_id' => $one->course_id, 'id' => $index])}}">{{$one->title}}</a>
                         <span title="წაშლა" class="pointer ddel icon study-error"></span>
                     </li>
                     @continue
                 @endif
                 <li>
-                    <a href="{{route('lesson', ['id' => $index])}}">{{$one->title}}</a>
+                    <a href="{{route('lesson', ['course_id' => $one->course_id,'id' => $index])}}">{{$one->title}}</a>
                     <span title="წაშლა" class="pointer ddel icon study-error"></span>
                 </li>
             @endforeach
