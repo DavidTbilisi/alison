@@ -37,6 +37,8 @@ class HomeController extends Controller
             $this->all['user'] =  User::where("id",session('user_id'))->get();
             return $next($request);
         });
+
+
     }
     public function index()
     {
@@ -274,6 +276,9 @@ class HomeController extends Controller
 
     }
 
+
+    //    course
+    //********************************************************
     public function course()
     {
         $scourses = Courses::all();
@@ -286,7 +291,13 @@ class HomeController extends Controller
             $this->uploadShortCourse($request);
             return back()->with('success','კურსის აღწერა დამატებულია');
         }
-        return view('admin.user.courses.short.admin-course-add', ['all'=>$this->all, 'allCats' => $allCats ]);
+
+        return view('admin.user.courses.short.admin-course-add',
+            [
+                'all'=>$this->all,
+                'allCats' => $allCats,
+            ]
+        );
     }
     public function editCourse(Request $request)
     {
@@ -294,24 +305,39 @@ class HomeController extends Controller
             $this->uploadShortCourse($request);
         }
         $scourse = Courses::where("id",$request->id)->get();
-        return view('admin.user.courses.short.admin-course-edit', ['all'=>$this->all, 'scourse' => $scourse]);
+        return view('admin.user.courses.short.admin-course-edit',
+            [
+                'all'=>$this->all,
+                'scourse' => $scourse
+            ]
+        );
     }
     public function deleteCourse(Request $request)
     {
         Courses::where("id",$request->id)->delete();
         return redirect(route('dashboard'))->with('deleted','კურსი წარმატებით წაიშალა');
     }
+    //********************************************************
 
+
+    //    lessons
+    //********************************************************
     public function lesson($course_id,$active = 0)
     {
-        // always 1 or above;
-         // $active = $active > 1 ? $active-- : $active;
+        session(['course_id'=>$course_id]);
+        echo "<script>";
+        echo "var course_id = ".json_encode(session('course_id'));
+        echo "</script>";
+        $user_id = session('user_id');
+        $course_id = session('course_id');
+
+
+        // dump('course_id: '.$course_id,'active lesson: '. $active);
+
+        $resources = Resource::byUserId($user_id); // ფაილები
         $hasCurses = false;
-        $resources = Resource::byUserId(session('user_id')); // ფაილები
-
         if(OneCourse::where('id','>',0)->where('course_id',$course_id)->exists() ){     $hasCurses = true;   }
-
-        $oneC = OneCourse::byUserId(session('user_id'),$course_id); // ტექსტიები
+        $oneC = OneCourse::byUserId($user_id,$course_id); // ტექსტიები
 
         return view('admin.user.courses.long.showcourse',
             [
@@ -324,39 +350,47 @@ class HomeController extends Controller
             ]
         );
     }
-
-    public function addLesson($course_id,Request $request)
+    public function addLesson(Request $request)
     {
-        $oneC = OneCourse::byUserId(session('user_id'));
+        $user_id = session('user_id');
+        $course_id = session('course_id');
+
         $lesson = new OneCourse();
         $lesson->title = $request->input('title');
-        $lesson->user_id = session('user_id');
+        $lesson->user_id = $user_id;
         $lesson->course_id = $course_id;
         $lesson->position = 1;
         $lesson->text = '';
         $lesson->save();
-        return redirect(route('lesson'));
+        return redirect(route('lesson',['course_id' => $course_id]));
     }
     public function editLesson(Request $request)
     {
         if(isset($request->id)){} else $request->id = 0;
-
+        $user_id = session('user_id');
+        $course_id = session('course_id');
         if($request->isMethod('post')){
-            $lesson = OneCourse::byUserId(session('user_id'));
+            $lesson = OneCourse::byUserId($user_id,$course_id);
             $lesson[$request->id]->title = $request->input('title');
-            $lesson[$request->id]->text = $request->input('text');
+            $lesson[$request->id]->text = $request->input('text')?$request->input('text'):'';
             $lesson[$request->id]->save();
-            return redirect(route('lesson',['id' => $request->id]));
+            return redirect(route('lesson',['course_id' => $course_id, 'id' => $request->id]));
         }
     }
     public function deleteLesson(Request $request)
     {
+        $user_id = session('user_id');
+        $course_id = session('course_id');
         if(isset($request->id)){} else $request->id = 1;
         if($request->isMethod('post')){
-            $lesson = OneCourse::byUserId(session('user_id'));
+            $lesson = OneCourse::byUserId($user_id,$course_id);
             $lesson[$request->id]->delete();
         }
     }
+    //********************************************************
+
+
+
 
 
     public function sendMail(Request $request)
@@ -375,7 +409,6 @@ class HomeController extends Controller
             return redirect(route('home'))->withErrors($validator);
         }
     }
-
     public function addCategory(){
         $categories = [
             "Health"=>[

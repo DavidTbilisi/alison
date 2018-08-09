@@ -83,7 +83,7 @@
                     success:function (data) {
                        var cnav = $(data).find(v.courseNavigation);
                         $(v.courseNavigation).replaceWith(cnav);
-                        location.href = route('lesson');
+                        location.href = route('lesson',course_id);
                     }
                 })
             }

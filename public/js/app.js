@@ -154,7 +154,7 @@ module.exports = __webpack_require__(3);
                     success: function success(data) {
                         var cnav = $(data).find(v.courseNavigation);
                         $(v.courseNavigation).replaceWith(cnav);
-                        location.href = route('lesson');
+                        location.href = route('lesson', course_id);
                     }
                 });
             }
@@ -177,7 +177,7 @@ module.exports = __webpack_require__(3);
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
+module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
 
 /***/ }),
 /* 3 */

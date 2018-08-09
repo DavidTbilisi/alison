@@ -1,5 +1,5 @@
-@dump($oneC)
-@dump($active)
+{{--@dump($oneC)--}}
+{{--@dump($active)--}}
 <div id="player-page">
     {{--<div class="player-page-bg"></div>--}}
     {{--<div class="wrapper breadcrumb-wrapper">--}}

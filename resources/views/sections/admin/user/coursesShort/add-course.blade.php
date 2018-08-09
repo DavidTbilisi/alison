@@ -33,7 +33,10 @@
                                 @if($option->root_id === 0)
                                     @continue;
                                 @else
-                                    <input type="checkbox" id="cat{{$option->id}}" value="{{ $option->id }}" >
+                                    <input type="checkbox"
+                                           id="cat{{$option->id}}"
+                                           value="{{ $option->id }}"
+                                           name="choose_category[]">
                                     <label for="cat{{$option->id}}">{{ $option->title }}</label>
                                 @endif
                             </li>
@@ -50,8 +53,6 @@
                     </script>
                 </div>
             </div>
-
-
             {{--todo: აქ კატეგორიებთან არსი რაღაც პრობლემა --}}
             {{---------------------------------------------------------------}}
             <div class="col-sm-4">

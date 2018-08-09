@@ -28,7 +28,6 @@
         {{--<a href="#" class="prev-next"><span class="icon-right-arrow"></span> Next Topic</a>--}}
         <form action="{{route('addlesson')}}" method="post">
         <input  type="text" placeholder="ჩაწერეთ გაკვეთილის სახელი" name="title">
-        {{--<a class="back-to-modules btn btn-green" href="#">დამატება</a>--}}
             @csrf
             <input type="submit"  class="back-to-modules btn btn-green" value="დამატება">
         </form>
