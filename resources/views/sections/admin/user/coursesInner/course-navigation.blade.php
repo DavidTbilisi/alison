@@ -14,7 +14,7 @@
                 @if($index == $active)
                     <li class="active">
                         <a href="{{route('lesson', ['course_id' => $one->course_id, 'id' => $index])}}">{{$one->title}}</a>
-                        <span title="წაშლა" class="pointer ddel icon study-error"></span>
+                        <span title="წაშლა" class="pointer deleteLesson icon study-error"></span>
                     </li>
                     @continue
                 @endif

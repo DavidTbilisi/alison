@@ -18,7 +18,7 @@
     "admincourses": "admin\/courses",
     "addcourse": "admin\/courses\/add",
     "edit": "admin\/courses\/edit\/{id}",
-    "delete": "admin\/courses\/delete\/{id}",
+    "deleteLessons": "admin\/courses\/delete\/{id}",
     "lesson": "admin\/courses\/{course_id}\/lesson\/{id?}",
     "addlesson": "admin\/courses\/addlesson",
     "editlesson": "admin\/courses\/editlesson\/{id?}",

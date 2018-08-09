@@ -101,14 +101,15 @@ module.exports = __webpack_require__(3);
 
 (function ($) {
     setTimeout(function () {
-        // console.clear();
+        console.clear();
     }, 2e3);
 
     var view = function () {
         return {
             name: 'view',
             pasteBtn: $('span.pointer.icon.study-paste'),
-            delete: $('.ddel'),
+            deleteLessons: $('.deleteLesson'),
+            deleteCourse: $('.deleteCourse'),
             courseNavigation: '.course-navigation',
             url: {
                 baseUrl: location.origin + "/alison/public",
@@ -118,7 +119,6 @@ module.exports = __webpack_require__(3);
     }();
 
     var octopus = function (v) {
-
         var route = function route() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -132,7 +132,15 @@ module.exports = __webpack_require__(3);
             }
         };
 
-        console.log(route('editlesson', [2]));
+        function del(page, id, redirect) {
+            jQuery.ajax({
+                url: route(page, id),
+                method: 'post',
+                success: function success() {
+                    location.href = redirect;
+                }
+            });
+        }
 
         // Events
         v.pasteBtn.click(function (e) {
@@ -141,26 +149,23 @@ module.exports = __webpack_require__(3);
             tinymce.get("lesson").execCommand('mceInsertContent', false, code);
         });
 
-        v.delete.click(function () {
+        v.deleteLessons.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
             v.currnetDelId = v.currnetDelHref.slice(-1);
-            v.deleteUrl = 2;
-            function del() {
-                jQuery.ajax({
-                    url: route('deletelesson', v.currnetDelId),
-                    method: 'post',
-                    data: { del: v.currnetDelId },
-                    success: function success(data) {
-                        var cnav = $(data).find(v.courseNavigation);
-                        $(v.courseNavigation).replaceWith(cnav);
-                        location.href = route('lesson', course_id);
-                    }
-                });
-            }
+
             var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
             if (sure) {
-                del();
+                del('deletelesson', v.currnetDelId, route('lesson', course_id));
+            }
+        });
+        v.deleteCourse.click(function () {
+            var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
+            if (sure) {
+                var id = $(this).data('course-id');
+                del('delete', id, route('dashboard'));
+            } else {
+                console.log('არ გინდა და როგორც გინდა');
             }
         });
 
@@ -177,7 +182,7 @@ module.exports = __webpack_require__(3);
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
+module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","deleteLessons":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
 
 /***/ }),
 /* 3 */

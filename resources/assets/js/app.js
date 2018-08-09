@@ -24,7 +24,7 @@
 
 (function ($){
     setTimeout(function(){
-        // console.clear();
+        console.clear();
     },2e3);
 
 
@@ -34,7 +34,8 @@
         return {
             name:'view',
             pasteBtn: $('span.pointer.icon.study-paste'),
-            delete: $('.ddel'),
+            deleteLessons: $('.deleteLesson'),
+            deleteCourse: $('.deleteCourse'),
             courseNavigation: '.course-navigation',
             url:{
                 baseUrl: location.origin + "/alison/public",
@@ -45,8 +46,6 @@
 
 
     var octopus = (function (v){
-
-
         var route = function() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -60,7 +59,15 @@
                     .join('/');
             }};
 
-        console.log(route('editlesson',[2]));
+        function del(page,id, redirect){
+            jQuery.ajax({
+                url:route(page,id),
+                method:'post',
+                success:function () {
+                    location.href = redirect;
+                }
+            })
+        }
 
         // Events
         v.pasteBtn.click(function (e) {
@@ -70,32 +77,27 @@
                 .execCommand('mceInsertContent', false, code);
         });
 
-        v.delete.click(function () {
+        v.deleteLessons.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
             v.currnetDelId = v.currnetDelHref.slice(-1);
-            v.deleteUrl = 2;
-            function del(){
-                jQuery.ajax({
-                    url:route('deletelesson',v.currnetDelId),
-                    method:'post',
-                    data:{del:v.currnetDelId},
-                    success:function (data) {
-                       var cnav = $(data).find(v.courseNavigation);
-                        $(v.courseNavigation).replaceWith(cnav);
-                        location.href = route('lesson',course_id);
-                    }
-                })
-            }
+
             var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
             if (sure){
-                del();
+                del('deletelesson',v.currnetDelId,route('lesson',course_id));
+            }
+        });
+        v.deleteCourse.click(function () {
+            var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
+            if (sure){
+                var id = $(this).data('course-id');
+                del('delete',id,route('dashboard'));
+
+            } else {
+                console.log('არ გინდა და როგორც გინდა')
             }
 
-
-
         });
-
 
 
         return {}
