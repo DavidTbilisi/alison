@@ -816,12 +816,12 @@ function userProfileSwitch(){
             success: function (data) {
                 $('.loading').fadeOut();
                 if (data.status == 'success') {
-                    var public = $('#is_public');
-                    if(public.hasClass('button-on')){
-                        public.removeClass('button-on').addClass('button-off');
+                    var _public = $('#is_public');
+                    if(_public.hasClass('button-on')){
+                        _public.removeClass('button-on').addClass('button-off');
                     }
                     else{
-                        public.removeClass('button-off').addClass('button-on');
+                        _public.removeClass('button-off').addClass('button-on');
                     }
                     Lang.message(['success.success',data.message]);
                     $('.view-profile').html(data.message);
@@ -4264,7 +4264,7 @@ function Course(){
 
         var id = ( typeof course.republished_course_id !== 'undefined' && course.republished_course_id != 0 ) ? course.republished_course_id : course.id,
             slug = ( typeof course.republished_course_id !== 'undefined' && course.republished_course_id != 0 ) ? course.republished_course_slug : course.slug
-            name = course.name,
+             name = course.name,
             abs_url = (language == 'en' ? absolute_url : absolute_url +'/'+ language),
             headline = (typeof course.headline !== 'undefined' ? course.headline.replace(/(<([^>]+)>)/ig, "")  : ''),
             courseUrl = '',
@@ -4520,7 +4520,7 @@ function NewLookCourses(options){
             nextTab = document.querySelector('.course-tab.active + .course-tab');
 
         console.error('There is an issue with '+currentTab.dataset.type+' courses right now. Please try again later')
-        
+
         //This is a fix to provide a circular fallback if there is an error on the last tab
         var nodes = document.querySelectorAll('.course-tab')[0];
         if(nextTab === null){

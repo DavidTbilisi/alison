@@ -200,11 +200,38 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $scourses = Courses::all();
-        $user = User::where("id",session('user_id'))->get();
-        return view('admin-user', ['all'=>$this->all, 'scourses'=>$scourses , 'user' => $user]);
-//        return view('admin-user', ['all'=>$this->all]);
+        $user_id = session('user_id');
+
+        $scourses = Courses::where('author_id',$user_id)->get();
+        $all = OneCourse::all();
+        dump($all[0]->getAttributes());
+
+        $oneC = new OneCourse();
+        foreach($scourses as $oneCourse) {
+            $bool = OneCourse::isLessonsInCourse($user_id,$oneCourse->id);
+            if ($bool) {
+                $oneC = OneCourse::isLessonsInCourse($user_id,$oneCourse->id,false);
+            } else {
+                $oneC[] = 0;
+            }
+        }
+
+
+        dump('oneC',$oneC);
+
+
+        $user = User::where("id",$user_id)->get();
+        return view('admin-user',
+            [
+                'all'       => $this->all,
+                'scourses'  => $scourses ,
+                'user'      => $user,
+                'oneC'      => $oneC,
+            ]);
     }
+
+
+
     public function uploadShortCourse ($request) {
         $rules = [
             'courseCover' => 'mimes:jpeg,png,jpg,gif',
@@ -388,9 +415,6 @@ class HomeController extends Controller
         }
     }
     //********************************************************
-
-
-
 
 
     public function sendMail(Request $request)

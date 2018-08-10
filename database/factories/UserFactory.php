@@ -50,6 +50,7 @@ $factory->define(App\Courses::class, function (Faker $faker) {
         'id' => null,
     'republished_course_id' => $faker->numberBetween(0,2) ,
     'course_type_id' => $faker->numberBetween(0,1) ,
+    'author_id' => $faker->numberBetween(1,3) ,
     "trending" => $faker->numberBetween(0,1) ,
     "responsive" => $faker->numberBetween(0,1) ,
     "avg_duration" => '2 - 5 საათამდე' ,

@@ -27,9 +27,24 @@
                     @endif
                 </td>
                 <td><p>{{$scours->name}}</p></td>
-                <td><a href="{{route('lesson',[$scours->id])}}" class="btn btn-green">გაკვეთილები ({{$i}})</a></td>
+
+                {{--**************** გაკვეთილების რაოდენობა კურსში ****************--}}
+                <td>
+                    <a href="{{route('lesson',[$scours->id])}}"
+                            class="btn btn-green">
+                            გაკვეთილები
+                        @php --$i @endphp
+                        @if($oneC[$i])
+                            ( {{$oneC[$i]->title}} )
+                        @else
+                            ( {{$oneC[$i]}} )
+                        @endif
+                    </a>
+                </td>
+
+
                 <td><a class="btn btn-blue" href="{{route('edit',$scours->id )}}">კონფიგურაცია</a></td>
-                <td><a class="ddel  btn btn-danger" href="{{route('delete',$scours->id )}}">წაშლა</a></td>
+                <td><a class="deleteCourse  btn btn-danger" data-course-id="$scours->id" href="#">წაშლა</a></td>
             </tr>
         @endforeach
         </tbody>
