@@ -108,7 +108,7 @@ module.exports = __webpack_require__(3);
         return {
             name: 'view',
             pasteBtn: $('span.pointer.icon.study-paste'),
-            deleteLessons: $('.deleteLesson'),
+            deleteLesson: $('.deleteLesson'),
             deleteCourse: $('.deleteCourse'),
             courseNavigation: '.course-navigation',
             url: {
@@ -149,7 +149,7 @@ module.exports = __webpack_require__(3);
             tinymce.get("lesson").execCommand('mceInsertContent', false, code);
         });
 
-        v.deleteLessons.click(function () {
+        v.deleteLesson.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
             v.currnetDelId = v.currnetDelHref.slice(-1);
@@ -168,7 +168,6 @@ module.exports = __webpack_require__(3);
                 console.log('არ გინდა და როგორც გინდა');
             }
         });
-
         return {};
     }(view);
 
@@ -182,7 +181,7 @@ module.exports = __webpack_require__(3);
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","deleteLessons":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
+module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
 
 /***/ }),
 /* 3 */

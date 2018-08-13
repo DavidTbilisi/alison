@@ -36,10 +36,8 @@
                         ({{count($oneC[--$i])}})
                     </a>
                 </td>
-
-
                 <td><a class="btn btn-blue" href="{{route('edit',$scours->id )}}">კონფიგურაცია</a></td>
-                <td><a class="deleteCourse  btn btn-danger" data-course-id="$scours->id" href="#">წაშლა</a></td>
+                <td><a class="deleteCourse  btn btn-danger" data-course-id="{{$scours->id}}" href="#">წაშლა</a></td>
             </tr>
         @endforeach
         </tbody>

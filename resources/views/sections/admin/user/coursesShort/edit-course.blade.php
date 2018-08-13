@@ -12,10 +12,11 @@
             <div class="col-sm-4">
                 <div class="add-course-image">
                     <label class="upload-label" for="file"><p>ატვირთეთ კურსის სურათი</p>
-                        @if(!strpos($scourse[0]->courseImgUrl,'http'))
-                            <img width="300" src="{{$scourse[0]->courseImgUrl}}" alt="">
+                        @if(strpos($scourse[0]->courseImgUrl,'ttp'))
+                            @dump('from online?',!strpos($scourse[0]->courseImgUrl,'ttp') )
+                            <img width="300" src="{{$scourse[0]->courseImgUrl}}" alt="{{$scourse[0]->courseImgUrl}}">
                         @else
-                            <img width="300" src="{{asset('image/'. $scourse[0]->courseImgUrl)}}" alt="">
+                            <img width="300" src="{{asset('images/'. $scourse[0]->courseImgUrl)}}" alt="{{$scourse[0]->courseImgUrl}}">
                         @endif
                     </label>
                     <input id="file"

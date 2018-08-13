@@ -201,10 +201,8 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user_id = session('user_id');
-        $scourses = Courses::where('author_id',$user_id)->get(); // 2 კურსი ამჟამად
-        $all = OneCourse::all();
+        $scourses = Courses::where('author_id',$user_id)->get();
 
-//        dd($all);
         $oneC = [];
         foreach($scourses as $index=>$oneCourse) {
             $bool = OneCourse::isLessonsInCourse($user_id,$oneCourse->id);
@@ -213,7 +211,6 @@ class HomeController extends Controller
             } else{
                 $oneC [] = [];
             }
-            // dump('index',$index,'oneC',$oneC);
         }
 
         $user = User::where("id",$user_id)->get();

@@ -34,7 +34,7 @@
         return {
             name:'view',
             pasteBtn: $('span.pointer.icon.study-paste'),
-            deleteLessons: $('.deleteLesson'),
+            deleteLesson: $('.deleteLesson'),
             deleteCourse: $('.deleteCourse'),
             courseNavigation: '.course-navigation',
             url:{
@@ -77,7 +77,7 @@
                 .execCommand('mceInsertContent', false, code);
         });
 
-        v.deleteLessons.click(function () {
+        v.deleteLesson.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
             v.currnetDelId = v.currnetDelHref.slice(-1);
@@ -92,14 +92,10 @@
             if (sure){
                 var id = $(this).data('course-id');
                 del('delete',id,route('dashboard'));
-
             } else {
                 console.log('არ გინდა და როგორც გინდა')
             }
-
         });
-
-
         return {}
     })(view);
 
