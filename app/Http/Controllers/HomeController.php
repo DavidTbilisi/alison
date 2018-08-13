@@ -201,24 +201,20 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user_id = session('user_id');
-
-        $scourses = Courses::where('author_id',$user_id)->get();
+        $scourses = Courses::where('author_id',$user_id)->get(); // 2 კურსი ამჟამად
         $all = OneCourse::all();
-        dump($all[0]->getAttributes());
 
-        $oneC = new OneCourse();
-        foreach($scourses as $oneCourse) {
+//        dd($all);
+        $oneC = [];
+        foreach($scourses as $index=>$oneCourse) {
             $bool = OneCourse::isLessonsInCourse($user_id,$oneCourse->id);
             if ($bool) {
-                $oneC = OneCourse::isLessonsInCourse($user_id,$oneCourse->id,false);
-            } else {
-                $oneC[] = 0;
+                $oneC[] = OneCourse::isLessonsInCourse($user_id,$oneCourse->id,false);
+            } else{
+                $oneC [] = [];
             }
+            // dump('index',$index,'oneC',$oneC);
         }
-
-
-        dump('oneC',$oneC);
-
 
         $user = User::where("id",$user_id)->get();
         return view('admin-user',

@@ -33,12 +33,7 @@
                     <a href="{{route('lesson',[$scours->id])}}"
                             class="btn btn-green">
                             გაკვეთილები
-                        @php --$i @endphp
-                        @if($oneC[$i])
-                            ( {{$oneC[$i]->title}} )
-                        @else
-                            ( {{$oneC[$i]}} )
-                        @endif
+                        ({{count($oneC[--$i])}})
                     </a>
                 </td>
 

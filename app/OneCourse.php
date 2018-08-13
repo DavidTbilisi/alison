@@ -15,10 +15,10 @@ class OneCourse extends Model
         $course_id !== 0? $course->where('course_id', $course_id) :'';
         return $course->orderBy('position','desc')->get();
     }
-    public static function isLessonsInCourse($user_id, $course_id,$bool=true) {
+    public static function isLessonsInCourse($user_id, $course_id, $wantBool=true) {
         $course = OneCourse::where('user_id', $user_id)
             ->where('course_id',$course_id);
-        if($bool){
+        if($wantBool){
             return $course->exists();
         } else{
             return $course->get();
