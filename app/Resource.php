@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-    public static function byUserId($id)
+    public static function byUserId($user_id, $course_id, $wantData = true)
     {
-       return Resource::where('user_id',$id)->get();
+       $res = Resource::where('user_id',$user_id)->where('course_id',$course_id);
+        if($wantData) {
+            return $res->get();
+        } else{
+        return $res->exists();
+        }
     }
 
 }

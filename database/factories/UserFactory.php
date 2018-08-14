@@ -51,6 +51,7 @@ $factory->define(App\Courses::class, function (Faker $faker) {
     'republished_course_id' => $faker->numberBetween(0,2) ,
     'course_type_id' => $faker->numberBetween(0,1) ,
     'author_id' => $faker->numberBetween(1,3) ,
+    'price' => $faker->numberBetween(10,30) ,
     "trending" => $faker->numberBetween(0,1) ,
     "responsive" => $faker->numberBetween(0,1) ,
     "avg_duration" => '2 - 5 საათამდე' ,
@@ -72,7 +73,7 @@ $factory->define(App\Courses::class, function (Faker $faker) {
     "root_category_slug" => $name ,
     "level" => $faker-> numberBetween(1,3),
     "environment" => $faker->word ,
-    "courseImgUrl" => $faker-> imageUrl(),
+    "courseImgUrl" => "https://picsum.photos/200/300/?".random_int(10,200),
     "points" => $faker-> randomDigit,
     ];
 });
@@ -104,7 +105,7 @@ $factory->define(App\Resource::class, function (Faker $faker) {
 $factory->define(App\OneCourse::class, function (Faker $faker) {
     return [
         'id' => null,
-        'course_id' => 1,
+        'course_id' => random_int(1,10),
         'user_id' => random_int(1,3),
         'title' => $faker->name,
         'position' => 1,

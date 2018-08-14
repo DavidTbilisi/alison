@@ -36,6 +36,7 @@ class CreateCoursesTable extends Migration
             $table->integer('republished_course_id')->nullable();
             $table->integer('course_type_id');
             $table->integer('author_id');
+            $table->integer('price');
             $table->integer("trending")->nullable();
             $table->integer("responsive")->nullable();
             $table->string("avg_duration", 50)->nullable();

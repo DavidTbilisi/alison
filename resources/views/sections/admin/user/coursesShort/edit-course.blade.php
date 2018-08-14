@@ -5,6 +5,8 @@
         </ul>
     </div>
 @endif
+
+
 <section class="add-course-wrapper">
     <form action="{{route('edit',['id' => request('id')])}}" enctype="multipart/form-data" method="post">
 
@@ -13,7 +15,6 @@
                 <div class="add-course-image">
                     <label class="upload-label" for="file"><p>ატვირთეთ კურსის სურათი</p>
                         @if(strpos($scourse[0]->courseImgUrl,'ttp'))
-                            @dump('from online?',!strpos($scourse[0]->courseImgUrl,'ttp') )
                             <img width="300" src="{{$scourse[0]->courseImgUrl}}" alt="{{$scourse[0]->courseImgUrl}}">
                         @else
                             <img width="300" src="{{asset('images/'. $scourse[0]->courseImgUrl)}}" alt="{{$scourse[0]->courseImgUrl}}">
@@ -90,7 +91,7 @@
                 {{-- todo: connect with db --}}
                 <div class="price-money">
                     <label for="payfor"> ფასი </label>
-                    <input type="number" name="payfor" id="payfor" min="0" max="500" placeholder="0" value="{{(int)$scourse[0]->avg_duration}}">
+                    <input type="number" name="payfor" id="payfor" min="0" max="500" placeholder="0" value="{{(int)$scourse[0]->price}}">
                 </div>
             </div>
         </div>

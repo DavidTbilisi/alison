@@ -12,7 +12,6 @@
         <h1>
 {{-- თითო გაკვეთილის შიგთავსი --}}
             <span class="icon-courses"></span>
-
             <input type="text"
                    name="title"
                    value="{{!$hasCurses? "": $oneC[$active]->title}}">
@@ -37,6 +36,5 @@
         {{--მარჯვენა ნავიგაცია გაკვეთილებში --}}
         @include('sections.admin.user.coursesInner.course-navigation')
         @include('sections.admin.user.coursesInner.upload-files') {{--რესურსების გვერდი--}}
-
     </div>
 </div>

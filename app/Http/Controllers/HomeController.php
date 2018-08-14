@@ -9,22 +9,19 @@ use App\OneCourse;
 use App\Resource;
 use App\ShortCourse;
 use App\User;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 
 class HomeController extends Controller
 {
     protected $all;
-    public function createSlug($str, $delimiter = '-'){
-
-        $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
-        return $slug;
-    }
 
     public function __construct(Request $request)
     {
@@ -37,8 +34,6 @@ class HomeController extends Controller
             $this->all['user'] =  User::where("id",session('user_id'))->get();
             return $next($request);
         });
-
-
     }
     public function index()
     {
@@ -252,6 +247,7 @@ class HomeController extends Controller
         $choose_category = $request->input('choose_category');
         $desc = $request->input('courseDesc');
         $fortime = $request->input('fortime');
+        $payfor = $request->input('payfor');
         $choose_category = implode(',',$choose_category) ;
 
         if($request -> id){
@@ -261,13 +257,14 @@ class HomeController extends Controller
                 $course->courseImgUrl = $name;
             }
             $course->name = $title;
-            $course->slug = $this->createSlug($title);
+            $course->slug = str_slug($title);
             $course->description = $desc;
+            $course->price = $payfor;
             $course->avg_duration = $fortime;
             $course->course_type_id = $choose_type;
             $course->category_name = $choose_category;
-            $course->category_slug = $this->createSlug($choose_category);
-            $course->category_slug = $this->createSlug($choose_category);
+            $course->category_slug = str_slug($choose_category);
+            $course->category_slug = str_slug($choose_category);
             $course->root_category_name = 0;
             $course->root_category_slug = 0;
             $course->parent_category_name = 0;
@@ -279,13 +276,15 @@ class HomeController extends Controller
             $course = new Courses();
             $course->courseImgUrl = $name;
             $course->name = $title;
-            $course->slug = $this->createSlug($title);
+            $course->author_id = session('user_id');
+            $course->slug = str_slug($title);
             $course->description = $desc;
             $course->avg_duration = $fortime;
+            $course->price = $payfor;
             $course->course_type_id = $choose_type;
             $course->category_name = $choose_category;
-            $course->category_slug = $this->createSlug($choose_category);
-            $course->category_slug = $this->createSlug($choose_category);
+            $course->category_slug = str_slug($choose_category);
+            $course->category_slug = str_slug($choose_category);
             $course->root_category_name = 0;
             $course->root_category_slug = 0;
             $course->parent_category_name = 0;
@@ -295,7 +294,13 @@ class HomeController extends Controller
         }
 
     }
-
+    public function uploadResource(Request $request)
+    {
+        $res = $request->file('file');
+        $name = $res->getClientOriginalName();
+        $dest = public_path('/images');
+        $res->move($dest,$name);
+    }
 
     //    course
     //********************************************************
@@ -345,20 +350,22 @@ class HomeController extends Controller
     public function lesson($course_id,$active = 0)
     {
         session(['course_id'=>$course_id]);
-        echo "<script>";
-        echo "var course_id = ".json_encode(session('course_id'));
-        echo "</script>";
         $user_id = session('user_id');
         $course_id = session('course_id');
+        echo "<script>";
+        echo "var course_id = ".json_encode($course_id);
+        echo "</script>";
+
 
 
         // dump('course_id: '.$course_id,'active lesson: '. $active);
-
-        $resources = Resource::byUserId($user_id); // ფაილები
+        $resources = Resource::byUserId($user_id,$course_id,false);
+        if(Resource::byUserId($user_id,$course_id,false)) {
+            $resources = Resource::byUserId($user_id,$course_id); // ფაილები
+        }
         $hasCurses = false;
-        if(OneCourse::where('id','>',0)->where('course_id',$course_id)->exists() ){     $hasCurses = true;   }
-        $oneC = OneCourse::byUserId($user_id,$course_id); // ტექსტიები
-
+        if(OneCourse::isLessonsInCourse($user_id,$course_id) ){     $hasCurses = true;   }
+        $oneC = OneCourse::isLessonsInCourse($user_id,$course_id,false); // ტექსტიები
         return view('admin.user.courses.long.showcourse',
             [
                 'all'=>$this->all,
@@ -406,6 +413,59 @@ class HomeController extends Controller
             $lesson = OneCourse::byUserId($user_id,$course_id);
             $lesson[$request->id]->delete();
         }
+    }
+    //********************************************************
+
+
+    //    Resources
+    //********************************************************
+    public function addResource(Request $request)
+    {
+
+        $user_id = session('user_id');
+        $course_id = session('course_id');
+
+
+        $res = $request->file('file');
+        $size = $res->getSize();
+        $type = $res->getMimeType();
+        $name = time().".".$res->getClientOriginalExtension();
+        $dest = public_path('uploads\user'.$user_id.'\\' ) ;
+//        dd($dest);
+
+        if ( !file_exists( $dest ) ) {
+//            Storage::makeDirectory($dest);
+            mkdir($dest);
+        } else{
+        }
+        dump(time().".".$res->getClientOriginalExtension());
+        $res->move($dest,$name);
+
+
+        $name = $request->input("name");
+        $desc = $request->input("desc");
+        $res_link = $name;
+
+
+        $resource = new Resource();
+        $resource->user_id   = $user_id  ;
+        $resource->course_id = $course_id ;
+        $resource->name = $name;
+        $resource->desc = $desc;
+        $resource->res_link = $res_link;
+
+        dump($resource);
+
+        // $resource->save();
+
+    }
+    public function editResource()
+    {
+
+    }
+    public function deleteResource()
+    {
+
     }
     //********************************************************
 

@@ -16,9 +16,10 @@
         <div class="modal-body">
             <div class="uploaded-list mCustomScrollbar scrollbar ">
                 <h1>კურსის მასალა</h1>
-                <form action="{{route('lesson',['course_id' => $course_id])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('addres')}}" method="post" enctype="multipart/form-data">
                     <input type="text" placeholder="სათაური" name="name">
                     <input type="text" placeholder="აღწერა" name="desc">
+                    @csrf
                     <input type="file" id="upload" name="file">
                     <label for="upload">ატვირთვა</label>
                     <input class="pointer" type="submit" name="submit" value="დამატება">
@@ -33,6 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @if($resources)
                     @foreach($resources as $index=>$value)
                         <tr>
                             <td>{{$value->created_at}}</td>
@@ -45,6 +47,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
