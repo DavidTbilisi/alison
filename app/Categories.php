@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     protected $table = 'categories';
-
+    protected $guarded = ['id'];
     public static function activeCategories()
     {
         return Categories::where('status', 1)->get();

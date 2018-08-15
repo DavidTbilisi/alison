@@ -33,9 +33,11 @@
    var view = (function (){
         return {
             name:'view',
-            pasteBtn: $('span.pointer.icon.study-paste'),
-            deleteLesson: $('.deleteLesson'),
-            deleteCourse: $('.deleteCourse'),
+            pasteBtn        : $('span.pointer.icon.study-paste'),
+            deleteLesson    : $('.deleteLesson'),
+            deleteCourse    : $('.deleteCourse'),
+            editResource    : $('#mymodal .study-edit'),
+            deleteResource  : $('#mymodal .study-delete'),
             courseNavigation: '.course-navigation',
             url:{
                 baseUrl: location.origin + "/alison/public",
@@ -46,6 +48,8 @@
 
 
     var octopus = (function (v){
+
+        // Functions
         var route = function() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -58,7 +62,6 @@
                     .map(s => s[0] == '{' ? args.shift() : s)
                     .join('/');
             }};
-
         function del(page,id, redirect){
             jQuery.ajax({
                 url:route(page,id),
@@ -69,14 +72,14 @@
             })
         }
 
+
+
         // Events
         v.pasteBtn.click(function (e) {
-            var code = $(e.target).parent().prev().text();
-            // console.log( 'CODE: ',code );
-            tinymce.get("lesson")
-                .execCommand('mceInsertContent', false, code);
+            var code = $(e.target).parent().prev().children();
+            var mce = tinymce.get("lesson");
+            mce.execCommand('mceInsertContent', false, code.prop('outerHTML') );
         });
-
         v.deleteLesson.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
@@ -95,6 +98,18 @@
             } else {
                 console.log('არ გინდა და როგორც გინდა')
             }
+        });
+        v.editResource.click(function (e) {
+            var resource_id = $(e.target).data('id');
+
+            $.ajax({
+                url:route('editres', resource_id ),
+                type:'post',
+                data: {name:'david'},
+                success:function (d) {
+                    console.log(d)
+                }
+            })
         });
         return {}
     })(view);

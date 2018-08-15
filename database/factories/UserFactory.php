@@ -96,9 +96,10 @@ $factory->define(App\Resource::class, function (Faker $faker) {
         'id' => null,
         'user_id' => random_int(1,3),
         'course_id' => random_int(1,10),
+        'type' => "image/jpeg",
         'name' => $faker->name,
         'desc' =>  $faker->sentence(random_int(3,5), true),
-        'res_link' =>  $faker->imageUrl(),
+        'res_link' =>  "https://picsum.photos/400/500/?".random_int(10,200),
     ];
 });
 

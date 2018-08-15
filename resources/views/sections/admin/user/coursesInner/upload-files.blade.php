@@ -40,10 +40,31 @@
                             <td>{{$value->created_at}}</td>
                             <td>{{$value->name}}</td>
                             <td>{{$value->desc}}</td>
+                            @if(strpos($value->type, 'mage'))
+                                <td hidden data-type="{{$value->type}}">
+                                    <img src="{{$value->res_link}}" alt="{{$value->res_link}}">
+                                </td>
+                            @elseif(strpos($value->type, 'udio'))
+                                <td hidden data-type="{{$value->type}}">
+                                    <audio controls>
+                                        <source src="{{$value->res_link}}" type="{{$value->type}}">
+                                    </audio>
+                                </td>
+                            @elseif(strpos($value->type, 'idio'))
+                                <td hidden data-type="{{$value->type}}">
+                                    <video controls>
+                                        <source src="{{$value->res_link}}" type="{{$value->type}}">
+                                    </video>
+                                </td>
+                                @else
+                                <td hidden data-type="{{$value->type}}">
+                                    link:{{$value->res_link}} type:{{$value->res_link}}
+                                </td>
+                            @endif
                             <td class="space-around">
                                 <span title='ჩასმა' class="pointer icon study-paste"></span>
-                                <span title='შეცვლა' class="pointer icon study-edit"></span>
-                                <span title='წაშლა' class="pointer icon study-trash"></span>
+                                <span title='შეცვლა' data-id="{{$value->id}}" class="pointer icon study-edit"></span>
+                                <span title='წაშლა' data-id="{{$value->id}}" class="pointer icon study-trash"></span>
                             </td>
                         </tr>
                     @endforeach

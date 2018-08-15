@@ -18,6 +18,7 @@ class CreateResourcesTable extends Migration
             $table->integer('user_id');
             $table->integer('course_id');
             $table->string('name', 30);
+            $table->string('type', 40);
             $table->string('desc', 100);
             $table->string('res_link', 200);
             $table->timestamps();

@@ -110,6 +110,8 @@ module.exports = __webpack_require__(3);
             pasteBtn: $('span.pointer.icon.study-paste'),
             deleteLesson: $('.deleteLesson'),
             deleteCourse: $('.deleteCourse'),
+            editResource: $('#mymodal .study-edit'),
+            deleteResource: $('#mymodal .study-delete'),
             courseNavigation: '.course-navigation',
             url: {
                 baseUrl: location.origin + "/alison/public",
@@ -119,6 +121,8 @@ module.exports = __webpack_require__(3);
     }();
 
     var octopus = function (v) {
+
+        // Functions
         var route = function route() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -131,7 +135,6 @@ module.exports = __webpack_require__(3);
                 }).join('/');
             }
         };
-
         function del(page, id, redirect) {
             jQuery.ajax({
                 url: route(page, id),
@@ -144,11 +147,10 @@ module.exports = __webpack_require__(3);
 
         // Events
         v.pasteBtn.click(function (e) {
-            var code = $(e.target).parent().prev().text();
-            // console.log( 'CODE: ',code );
-            tinymce.get("lesson").execCommand('mceInsertContent', false, code);
+            var code = $(e.target).parent().prev().children();
+            var mce = tinymce.get("lesson");
+            mce.execCommand('mceInsertContent', false, code.prop('outerHTML'));
         });
-
         v.deleteLesson.click(function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
@@ -168,6 +170,18 @@ module.exports = __webpack_require__(3);
                 console.log('არ გინდა და როგორც გინდა');
             }
         });
+        v.editResource.click(function (e) {
+            var resource_id = $(e.target).data('id');
+
+            $.ajax({
+                url: route('editres', resource_id),
+                type: 'post',
+                data: { name: 'david' },
+                success: function success(d) {
+                    console.log(d);
+                }
+            });
+        });
         return {};
     }(view);
 
@@ -181,7 +195,7 @@ module.exports = __webpack_require__(3);
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}"}
+module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}","addres":"admin/courses/addRes","editres":"admin/courses/editRes/{id?}","deleteres":"admin/courses/deleteRes/{id?}"}
 
 /***/ }),
 /* 3 */

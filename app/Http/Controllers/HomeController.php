@@ -9,8 +9,10 @@ use App\OneCourse;
 use App\Resource;
 use App\ShortCourse;
 use App\User;
+use Carbon\Carbon;
 use Faker\Provider\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -350,6 +352,7 @@ class HomeController extends Controller
     public function lesson($course_id,$active = 0)
     {
         session(['course_id'=>$course_id]);
+        session(['lesson_id'=>$active]);
         $user_id = session('user_id');
         $course_id = session('course_id');
         echo "<script>";
@@ -424,44 +427,48 @@ class HomeController extends Controller
 
         $user_id = session('user_id');
         $course_id = session('course_id');
+        $lesson = session('lesson_id');
 
-
+        $name = $request->input('name');
+        $desc = $request->input("desc");
         $res = $request->file('file');
+
+        $upload_time = str_slug(Carbon::now('Asia/Tbilisi'));
+
         $size = $res->getSize();
         $type = $res->getMimeType();
-        $name = time().".".$res->getClientOriginalExtension();
-        $dest = public_path('uploads\user'.$user_id.'\\' ) ;
-//        dd($dest);
+
+        $originalName = $res->getClientOriginalName();
+        $originalExt = $res->getClientOriginalExtension();
+        $originalNameOnly = pathinfo( $originalName, PATHINFO_FILENAME );
+
+        $imageName = $upload_time."_".$originalNameOnly .'.'. $originalExt;
+
+        $resource_link = 'uploads\user'.$user_id.'\\';
+        $dest = public_path( $resource_link) ;
 
         if ( !file_exists( $dest ) ) {
-//            Storage::makeDirectory($dest);
             mkdir($dest);
-        } else{
         }
-        dump(time().".".$res->getClientOriginalExtension());
-        $res->move($dest,$name);
 
+        $res_link = $resource_link.$imageName;
 
-        $name = $request->input("name");
-        $desc = $request->input("desc");
-        $res_link = $name;
+        $res->move($dest, $res_link);
 
 
         $resource = new Resource();
         $resource->user_id   = $user_id  ;
         $resource->course_id = $course_id ;
         $resource->name = $name;
+        $resource->type = $type;
         $resource->desc = $desc;
-        $resource->res_link = $res_link;
-
-        dump($resource);
-
-        // $resource->save();
-
+        $resource->res_link = asset('uploads/'.$res_link);
+        $resource->save();
+        return redirect(route('lesson',$course_id, $lesson));
     }
-    public function editResource()
+    public function editResource(Request $request)
     {
-
+        return $request->input('name');
     }
     public function deleteResource()
     {
@@ -618,11 +625,11 @@ class HomeController extends Controller
                 $oneCategory['image'] = strtolower($one);
                 $allCategories[] = $oneCategory;
             }
-        endforeach;
-         dump( $allCategories );
-         foreach ($allCategories as $fill):
-        Categories::create($fill);
-    endforeach;
+            endforeach;
+            foreach ($allCategories as $fill):
+                dump( $fill);
+            Categories::create($fill);
+            endforeach;
     }
     public function setNewPassword(Request $request){
         if($request->isMethod('post')){
