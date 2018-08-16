@@ -16,4 +16,11 @@ class Resource extends Model
         }
     }
 
+    public static function getOne($user_id, $course_id, $id) {
+        $res = Resource::where('user_id',$user_id);
+        $res->where('course_id',$course_id);
+        return $res ->where('id',$id)->get();
+    }
+
+
 }

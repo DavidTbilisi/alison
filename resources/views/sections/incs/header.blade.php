@@ -33,9 +33,11 @@
     <link rel='alternate' href='fr.html' hreflang='fr' />
     <link rel='alternate' href='it.html' hreflang='it' />
     <link rel='alternate' href='pt-BR.html' hreflang='pt-br' />
+
     <link rel="font/woff2"  href="{{asset('assets/css/fonts/bpg-mrgvlovani-caps-webfont.woff2')}}">
     <link rel="font/woff2"  href="{{asset('assets/css/fonts/bpg-mrgvlovani-caps-webfont.woff2')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://file.myfontastic.com/dW8FBkf9MMXeppNqs4aKXa/icons.css" rel="stylesheet">
     <script>
         window.dataLayer = window.dataLayer || [];
         var localDataLayer = {};
@@ -74,7 +76,6 @@
     <script>
         var language = "en";
     </script>
-    <link rel="stylesheet" href="{{ asset('css/study-online-font.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main_v1.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{asset('assets/js/search.js')}}"></script>

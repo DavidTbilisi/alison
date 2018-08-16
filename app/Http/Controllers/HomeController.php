@@ -444,7 +444,7 @@ class HomeController extends Controller
 
         $imageName = $upload_time."_".$originalNameOnly .'.'. $originalExt;
 
-        $resource_link = 'uploads\user'.$user_id.'\\';
+        $resource_link = 'uploads/user'.$user_id.'\\';
         $dest = public_path( $resource_link) ;
 
         if ( !file_exists( $dest ) ) {
@@ -453,8 +453,9 @@ class HomeController extends Controller
 
         $res_link = $resource_link.$imageName;
 
+// not loading on server
         $res->move($dest, $res_link);
-
+// not loading on server
 
         $resource = new Resource();
         $resource->user_id   = $user_id  ;
@@ -462,17 +463,37 @@ class HomeController extends Controller
         $resource->name = $name;
         $resource->type = $type;
         $resource->desc = $desc;
-        $resource->res_link = asset('uploads/'.$res_link);
+        $resource->res_link = asset($res_link);
+//        dd($resource);
         $resource->save();
         return redirect(route('lesson',$course_id, $lesson));
     }
     public function editResource(Request $request)
     {
-        return $request->input('name');
-    }
-    public function deleteResource()
-    {
+        $arr["name"] = $request->input('name');
+        $arr["desc"] = $request->input('desc');
 
+        $user_id = session('user_id');
+        $course_id = session('course_id');
+        $lesson_id = $request->id;
+
+        $res = Resource::getOne($user_id,$course_id,$lesson_id);
+        $res[0]->name = $arr["name"];
+        $res[0]->desc = $arr["desc"];
+        $res[0]->save();
+
+        return $arr;
+    }
+    public function deleteResource(Request $request)
+    {
+        $user_id = session('user_id');
+        $course_id = session('course_id');
+        $lesson_id = $request->id;
+
+        $arr = [$user_id,$course_id,$lesson_id];
+        $res = Resource::getOne($user_id,$course_id,$lesson_id);
+        $res[0]->delete();
+        return $arr;
     }
     //********************************************************
 

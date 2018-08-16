@@ -232,6 +232,10 @@ h6,
   color: var(--dark);
 }
 
+[contenteditable=true] {
+  background: rgba(0, 128, 0, 0.09);
+}
+
 .course-navigation .topics_heading {
   font-weight: bolder;
 }

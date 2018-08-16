@@ -38,8 +38,8 @@
                     @foreach($resources as $index=>$value)
                         <tr>
                             <td>{{$value->created_at}}</td>
-                            <td>{{$value->name}}</td>
-                            <td>{{$value->desc}}</td>
+                            <td class="name">{{$value->name}}</td>
+                            <td class="desc">{{$value->desc}}</td>
                             @if(strpos($value->type, 'mage'))
                                 <td hidden data-type="{{$value->type}}">
                                     <img src="{{$value->res_link}}" alt="{{$value->res_link}}">
@@ -64,7 +64,7 @@
                             <td class="space-around">
                                 <span title='ჩასმა' class="pointer icon study-paste"></span>
                                 <span title='შეცვლა' data-id="{{$value->id}}" class="pointer icon study-edit"></span>
-                                <span title='წაშლა' data-id="{{$value->id}}" class="pointer icon study-trash"></span>
+                                <span title='წაშლა' data-id="{{$value->id}}" class="pointer icon study-trash" onclick="deleteRes({{$value->id}})"></span>
                             </td>
                         </tr>
                     @endforeach

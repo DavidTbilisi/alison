@@ -100,6 +100,7 @@ module.exports = __webpack_require__(3);
 
 
 (function ($) {
+
     setTimeout(function () {
         console.clear();
     }, 2e3);
@@ -110,8 +111,12 @@ module.exports = __webpack_require__(3);
             pasteBtn: $('span.pointer.icon.study-paste'),
             deleteLesson: $('.deleteLesson'),
             deleteCourse: $('.deleteCourse'),
-            editResource: $('#mymodal .study-edit'),
-            deleteResource: $('#mymodal .study-delete'),
+
+            editResource: $('#mymodal .study-edit'), //not dynamic;
+            editName: $('#mymodal [name=name]'), //not dynamic;
+            editDesc: $('#mymodal [name=desc]'), //not dynamic;
+            deleteResource: $('#mymodal .study-trash'), //not dynamic;
+
             courseNavigation: '.course-navigation',
             url: {
                 baseUrl: location.origin + "/alison/public",
@@ -144,14 +149,19 @@ module.exports = __webpack_require__(3);
                 }
             });
         }
+        function l() {
+            arguments.join = [].join;
+            var args = arguments.join(":");
+            console.log(args);
+        }
 
         // Events
-        v.pasteBtn.click(function (e) {
+        v.pasteBtn.on('click', function (e) {
             var code = $(e.target).parent().prev().children();
             var mce = tinymce.get("lesson");
             mce.execCommand('mceInsertContent', false, code.prop('outerHTML'));
         });
-        v.deleteLesson.click(function () {
+        v.deleteLesson.on('click', function () {
             v.currnetDel = $(this).parent().find("a");
             v.currnetDelHref = $(v.currnetDel).attr('href');
             v.currnetDelId = v.currnetDelHref.slice(-1);
@@ -161,7 +171,7 @@ module.exports = __webpack_require__(3);
                 del('deletelesson', v.currnetDelId, route('lesson', course_id));
             }
         });
-        v.deleteCourse.click(function () {
+        v.deleteCourse.on('click', function () {
             var sure = confirm('დარწმუნებული ხარ რომ გინდა წაშლა?');
             if (sure) {
                 var id = $(this).data('course-id');
@@ -170,24 +180,91 @@ module.exports = __webpack_require__(3);
                 console.log('არ გინდა და როგორც გინდა');
             }
         });
-        v.editResource.click(function (e) {
-            var resource_id = $(e.target).data('id');
 
+        function editResourcesFn(e) {
+            var resource_id = $(e.target).data('id');
+            var target = $(e.target);
+            var oneRow = target.parent().parent();
+            var name = oneRow.find('.name');
+            var desc = oneRow.find('.desc');
+            function makeEditable(class1, class2) {
+                var editClass = 'study-edit';
+                var saveClass = 'study-save';
+                target.toggleClass(editClass);
+                target.toggleClass(saveClass);
+                if (target.hasClass(saveClass)) {
+                    name.attr('contenteditable', 'true');
+                    desc.attr('contenteditable', 'true');
+                } else {
+                    name.attr('contenteditable', 'false');
+                    desc.attr('contenteditable', 'false');
+                }
+            }
+            makeEditable('study-edit', 'study-save');
             $.ajax({
                 url: route('editres', resource_id),
                 type: 'post',
-                data: { name: 'david' },
+                data: { "name": name.text(), "desc": desc.text() },
+                beforeSend: function beforeSend() {
+                    // console.log('sending info:');
+                },
                 success: function success(d) {
-                    console.log(d);
+                    // console.log('d:', d);
                 }
             });
-        });
-        return {};
+        }
+
+        $('#mymodal').on('click', '.study-edit', editResourcesFn);
+        $('#mymodal').on('click', '.study-save', editResourcesFn);
+        window.deleteRes = function (id) {
+            $.ajax({
+                url: route('deleteres', id),
+                type: 'post',
+                data: { "lesson_id": id },
+                success: function success(d) {
+                    console.log('d:', d);
+                }
+            });
+            $.ajax({
+                url: route('lesson', course_id),
+                type: "get",
+                success: function success(d) {
+                    var toReplace = '#mymodal .modal-body';
+                    var modalBody = $(toReplace);
+                    console.log('mymodal:', $(d).find(toReplace));
+                    modalBody.replaceWith($(d).find(toReplace));
+                }
+            });
+        };
+
+        //     $('#mymodal .study-trash').on('click',function (e) {
+        //         var id = $(this).data('id');
+        //         $.ajax({
+        //             url:route('deleteres',id),
+        //             type:'post',
+        //             data:{"lesson_id":id},
+        //             success:function (d) {
+        //                 console.log('d:', d);
+        //             }
+        //         });
+        //         $.ajax({
+        //             url:route('lesson',course_id),
+        //             type:"get",
+        //             success:function (d) {
+        //                 var toReplace = '#mymodal .modal-body';
+        //                 var modalBody = $(toReplace);
+        //                 console.log('mymodal:', $(d).find(toReplace));
+        //                 modalBody.replaceWith($(d).find(toReplace))
+        //             }
+        //         })
+        //     });
+        //     return {}
     }(view);
 
     window.StudyOnline = {
         view: view,
         octopus: octopus
+
     };
 })(jQuery);
 
