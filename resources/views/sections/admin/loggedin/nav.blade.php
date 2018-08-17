@@ -43,12 +43,17 @@
         </div>
         <div class="header-left">
             <div class="logo-container">
-                <a href="{{route('home')}}" class="logo"><img src="https://cdn01.alison-static.net/public/html/vendor/img/logo.svg" width="130" height="29" alt="Free Online Courses, Classes and Tutorials"></a>
-                <a href="{{route('home')}}" class="logo-short"><img src="https://cdn01.alison-static.net/public/html/vendor/img/logo-short.svg" width="50" height="33" alt="Free Online Courses, Classes and Tutorials"></a>
+                <a href="{{route('home')}}" class="logo"><img
+                            src="https://cdn01.alison-static.net/public/html/vendor/img/logo.svg" width="130"
+                            height="29" alt="Free Online Courses, Classes and Tutorials"></a>
+                <a href="{{route('home')}}" class="logo-short"><img
+                            src="https://cdn01.alison-static.net/public/html/vendor/img/logo-short.svg" width="50"
+                            height="33" alt="Free Online Courses, Classes and Tutorials"></a>
             </div>
             <div class="search-container ">
                 <form method="GET" action="https://alison.com/courses" accept-charset="UTF-8">
-                    <input maxlength="200" autocomplete="off" placeholder="Search for courses" id="autocomplete" name="query" type="text">
+                    <input maxlength="200" autocomplete="off" placeholder="Search for courses" id="autocomplete"
+                           name="query" type="text">
                     <button type="submit" class="btn btn-warning btn-fla"><span class="icon-search"></span></button>
                 </form>
             </div>
@@ -183,12 +188,13 @@
         <div class="header-right">
             <a href="{{route('dashboard')}}" class="link sidebar-trigger">
                 <div class="avatar-outer">
-                    <img class="avatar" src="https://alison.com/images/users/620cdb13a5a6026fadddcea540a0782c51a680136ad7c565064c57b38dde7908/11519451.jpg" alt="David Chincharashvili">
+                    {{--<img class="avatar" src="https://alison.com/images/users/620cdb13a5a6026fadddcea540a0782c51a680136ad7c565064c57b38dde7908/11519451.jpg" alt="David Chincharashvili">--}}
+                    <span class="avatar icon study-user-inverse" style="font-size: 30px; color:#0094c9;"></span>
                 </div>
                 <span>{{ucfirst(session('loggedin'))}}'s Profile </span>
             </a>
             <span class="hide-on-scroll">
-<a href="#" class="notifications" title="Notifications">
+            <a href="#" class="notifications" title="Notifications">
 <span data-endpoint="https://api.alison.com/v0.1" class="number position update-notification-amount">11</span>
 <span class="icon-bell-line"></span>
 </a>
@@ -198,43 +204,43 @@
 </a>
 </span>
             <div class="dropdown-menu profile-menu dd-menu">
-                <div class="triangle"></div>
+                <div class="triangle" ></div>
                 <div class="dropdown-menu-inner profile-menu-inner drop-shadow">
                     <ul>
-                        <li class="resume-study">
-                            <a class="btn btn-large" href="https://alison.com/resume/courses" title="Resume Study">
-                                <span class="resume-label">Resume Study</span>
-                                <span class="icon-play"></span>
-                            </a>
-                        </li>
+                        {{--<li class="resume-study">--}}
+                            {{--<a class="btn btn-large" href="https://alison.com/resume/courses" title="Resume Study">--}}
+                                {{--<span class="resume-label">Resume Study</span>--}}
+                                {{--<span class="icon-play"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
                         <li class="my-profile">
-                            <a href="#">
-                                {{ucfirst(session('loggedin'))}}
-                                <span>View Profile</span>
+                            <a href="{{route("dashboard")}}" title="Dashboard">
+                                {{ucfirst($all['user'][0]->name)}}
+                                {{ucfirst($all['user'][0]->lastname)}}
+                                <span>პროფილში გადასვლა</span>
                                 <div class="arrow">»</div>
                             </a>
                         </li>
                         <li>
-                            <a class="cancel-scroll" href="https://alison.com/dashboard#dashboard-listing" title="courses">
-                                <span class="active-courses">8</span>
-                                Active Courses
+                            <a class="cancel-scroll" href="#">
+                              შეძენილი კურსები
                             </a>
                         </li>
                         <li>
-                            <a href="{{route("dashboard")}}" title="Dashboard">
-                                Dashboard </a>
+                            <a href="#" >
+                                ატვირთული კურსები </a>
                         </li>
                         <li>
-                            <a href="https://alison.com/referrals-programme/about" title="Refer a Friend">
-                                Refer a Friend </a>
+                            <a href="#" >
+                                გადახდების ისტორია </a>
                         </li>
                         <li>
-                            <a href="https://alison.com/faqs/search" title="Help">
-                                Help </a>
+                            <a href="#">
+                                დახმარება </a>
                         </li>
                         <li class="logout">
                             <a href="{{route('logout')}}" title="Logout">
-                                <span>Logout</span>
+                                <span>გამოსვლა</span>
                             </a>
                         </li>
                         <li class="social-menu">

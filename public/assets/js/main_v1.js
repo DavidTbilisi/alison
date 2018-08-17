@@ -4072,7 +4072,6 @@ function isLoggedIn(){
 
 }
 
-
 /**
  * Create a new course object
  *

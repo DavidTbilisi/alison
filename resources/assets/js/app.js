@@ -38,10 +38,11 @@
             deleteLesson    : $('.deleteLesson'),
             deleteCourse    : $('.deleteCourse'),
 
+            mymodal         : $('#mymodal'),             //not dynamic;
             editResource    : $('#mymodal .study-edit'), //not dynamic;
             editName        : $('#mymodal [name=name]'), //not dynamic;
             editDesc        : $('#mymodal [name=desc]'), //not dynamic;
-            deleteResource  : $('#mymodal .study-trash'), //not dynamic;
+            deleteResource  : $('#mymodal .study-trash'),//not dynamic;
 
             courseNavigation: '.course-navigation',
             url:{
