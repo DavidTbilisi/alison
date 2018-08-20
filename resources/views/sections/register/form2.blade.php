@@ -83,6 +83,8 @@
                        type="password"
                        value="{{ old('new_password') }}">
             </div>
+
+            {{--TODO: ეს ღილაკი Javascript-ის გამო არ მუშაობს--}}
             <input class="submit-login signup-button"
                    type="submit" value="შენახვა">
             @endLoggedIn

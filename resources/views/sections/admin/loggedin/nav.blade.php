@@ -188,14 +188,15 @@
         <div class="header-right">
             <a href="{{route('dashboard')}}" class="link sidebar-trigger">
                 <div class="avatar-outer">
-                    {{--<img class="avatar" src="https://alison.com/images/users/620cdb13a5a6026fadddcea540a0782c51a680136ad7c565064c57b38dde7908/11519451.jpg" alt="David Chincharashvili">--}}
+                    {{--<img class="avatar" src="#" alt="David Chincharashvili">--}}
                     <span class="avatar icon study-user-inverse" style="font-size: 30px; color:#0094c9;"></span>
                 </div>
                 <span>{{ucfirst(session('loggedin'))}}'s Profile </span>
             </a>
             <span class="hide-on-scroll">
             <a href="#" class="notifications" title="Notifications">
-<span data-endpoint="https://api.alison.com/v0.1" class="number position update-notification-amount">11</span>
+                {{--TODO: change url--}}
+<span data-endpoint="https://api.alison.com/v0.1" class="number position update-notification-amount">0</span>
 <span class="icon-bell-line"></span>
 </a>
 <a href="#" class="cart" title="Shop">

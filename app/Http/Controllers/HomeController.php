@@ -117,8 +117,8 @@ class HomeController extends Controller
             $users = new User;
             $users->name = $request->input('firstname');
             $users->lastname = $request->input('lastname');
-            $users->email= $request->input('signup_email');
-            $users->password= bcrypt($request->input('signup_password'));
+            $users->email = $request->input('signup_email');
+            $users->password = bcrypt($request->input('signup_password'));
             $users->remember_token = $request->input('_token');
             $users->save();
            return redirect(route("login"))->with('success','თქვენ წარმატებით გაიარეთ რეგისტრაცია');
@@ -501,7 +501,6 @@ class HomeController extends Controller
     public function sendMail(Request $request)
     {
         if($request->method('post')) {
-
             $rules = ['email' => 'required|exists:users,email'];
             $messages = [
                 'email.required' => 'ელ.ფოსტა აუცილებელია შესავსებად',
@@ -510,7 +509,11 @@ class HomeController extends Controller
             $validator = $this->validate($request,$rules,$messages);
 
             $user = User::where('email',$request->email)->get();
-            Mail::to($request->email)->send(new MailClass($user[0]->name, $user[0]->email));
+            $pass = str_random(8);
+            $user[0]->password = bcrypt($pass);
+            $user[0]->save();
+            Mail::to($request->email)
+                ->send(new MailClass($user[0]->name, $user[0]->email, $pass));
             return redirect(route('home'))->withErrors($validator);
         }
     }
