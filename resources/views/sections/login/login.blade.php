@@ -4,14 +4,9 @@
         <div class="join-box tab-wrapper login-page align-parent">
             <div class="align-center">
                 <div id="login-container-element" class="login-container">
-                    @if(session('success'))
-                        <div title="დააკლიკეთ რომ გაქრეს" class="derrors" onclick="this.style.display = 'none'">
-                        <div class="alert" style="top: -100px;
-    left: 14px;">
-                            {{session('success')}}
-                        </div>
-                        </div>
-                    @endif
+
+                    @include('sections.errors')
+
                     <ul class="tab-content">
                         <li id="login" class="tab active">
                             @include('sections.login.tabs.login')

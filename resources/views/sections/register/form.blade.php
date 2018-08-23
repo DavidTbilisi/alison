@@ -33,18 +33,9 @@
             </li>
         </ul>
         <div class="errors">
-            @if(count($errors)>0)
-                <div title="click to dismis" class="derrors" onclick="this.style.display = 'none'">
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endif
+            @include('sections.errors')
         </div>
+
         <input class="submit-login"
                type="submit"
                value="Log In">

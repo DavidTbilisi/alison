@@ -22,14 +22,4 @@
 </div>
 
 
-@if(count($errors)>0)
-    <div title="დააკლიკეთ რომ გაქრეს" class="derrors" onclick="this.style.display = 'none'">
-        <div class="alert alert-danger" style="left:125px">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-@endif
+@include('sections.errors')

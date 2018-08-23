@@ -27,4 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function courses()
+    {
+     return $this->hasMany(Courses::class, 'author_id');
+    }
+
+    public function resource()
+    {
+     return $this->hasMany(Resource::class, 'user_id');
+    }
 }

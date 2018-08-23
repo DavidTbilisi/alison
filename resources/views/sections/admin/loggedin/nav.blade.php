@@ -208,12 +208,12 @@
                 <div class="triangle" ></div>
                 <div class="dropdown-menu-inner profile-menu-inner drop-shadow">
                     <ul>
-                        {{--<li class="resume-study">--}}
-                            {{--<a class="btn btn-large" href="https://alison.com/resume/courses" title="Resume Study">--}}
-                                {{--<span class="resume-label">Resume Study</span>--}}
-                                {{--<span class="icon-play"></span>--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
+                        <li class="resume-study">
+                            <a class="btn btn-large" href="https://alison.com/resume/courses" title="Resume Study">
+                                <span class="resume-label">Resume Study</span>
+                                <span class="icon-play"></span>
+                            </a>
+                        </li>
                         <li class="my-profile">
                             <a href="{{route("dashboard")}}" title="Dashboard">
                                 {{ucfirst($all['user'][0]->name)}}

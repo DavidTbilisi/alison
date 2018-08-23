@@ -46,5 +46,14 @@ class Courses extends Model
         return null;
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, "id");
+    }
 
+    public function resource()
+    {
+        return $this->hasMany(Resource::class, "course_id");
+
+    }
 }

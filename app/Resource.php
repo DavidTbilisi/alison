@@ -22,5 +22,9 @@ class Resource extends Model
         return $res ->where('id',$id)->get();
     }
 
+    public function user()
+    {
+       return $this->belongsTo(User::class, 'id');
+    }
 
 }
