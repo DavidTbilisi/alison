@@ -43,6 +43,40 @@ h6,
   display: none !important;
 }
 
+.cart-d {
+  padding: 5rem 0;
+  min-height: 50vh;
+}
+
+.cart-d-title {
+  color: var(--color);
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.cart-d-table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cart-d-table table {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.cart-d-table table thead td {
+  text-align: center;
+}
+
+.cart-d-table table td {
+  padding: 1rem;
+  border: 1px solid #2960a2;
+}
+
 .add-course-wrapper {
   padding: 5rem;
   font-size: 1.2rem;
@@ -306,6 +340,46 @@ h6,
 #player-page .mymodal .icon.study-error {
   vertical-align: -1.2rem;
   font-size: 1.6rem;
+}
+
+#player-page .mymodal .edit,
+#player-page .mymodal .paste,
+#player-page .mymodal .remove {
+  position: relative;
+}
+
+#player-page .mymodal .edit img,
+#player-page .mymodal .paste img,
+#player-page .mymodal .remove img {
+  position: relative;
+  width: 20px;
+  z-index: 1;
+}
+
+#player-page .mymodal .edit::after,
+#player-page .mymodal .paste::after,
+#player-page .mymodal .remove::after {
+  z-index: 0;
+  display: block;
+  position: absolute;
+  color: #2e394282;
+  bottom: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 0px white, 1px 1px 0px black;
+}
+
+#player-page .mymodal .edit::after {
+  content: 'edit';
+}
+
+#player-page .mymodal .paste::after {
+  content: 'paste';
+}
+
+#player-page .mymodal .remove::after {
+  content: 'remove';
 }
 
 #player-page .mymodal p {

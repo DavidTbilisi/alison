@@ -2,7 +2,8 @@
   --color: #5b93d6;
   --dark: #2e3942;
 }
-
+$color:#5b93d6;
+$dark:#2e3942;
 //@font-face {
 //  font-family: head;
 //  src: url(fonts/bpg-mrgvlovani-caps-webfont.woff) format('woff');
@@ -26,7 +27,32 @@
 .mce-notification, .mce-branding {
   display: none !important;
 }
+.cart-d{
+  padding: 5rem 0;
+  min-height: 50vh;
+  //background-color: rgba(83, 250, 205, 0.18);
+  &-title{
+    color:var(--color);
+    text-align: center;
+    padding: 1rem 0;
+  }
+  &-table{
+    display: flex;
+    justify-content: center;
+    table{
+      border-collapse: collapse;
+      width: 80%;
 
+      thead td{
+        text-align: center;
+      }
+      td{
+        padding: 1rem;
+        border: 1px solid darken( $color , 20% );
+      }
+    }
+  }
+}
 .add-course-wrapper {
   padding: 5rem;
   font-size: 1.2rem;
@@ -256,6 +282,28 @@ select {
       vertical-align: -($size - 0.4rem);
       font-size: $size;
     }
+
+    .edit,.paste,.remove{
+      position: relative;
+      img{
+        position: relative;
+        width:20px;
+        z-index: 1;
+      }
+      &::after{
+        z-index: 0;
+        display: block;
+        position: absolute;
+        color: #2e394282;
+        bottom: 25%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-shadow: 1px 1px 0px white, 1px 1px 0px black;
+      }
+    }
+    .edit::after{ content: 'edit';}
+    .paste::after{ content: 'paste'}
+    .remove::after{ content: 'remove';}
     p {
       margin: 0 auto;
     }

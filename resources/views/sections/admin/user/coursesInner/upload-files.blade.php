@@ -62,9 +62,22 @@
                                 </td>
                             @endif
                             <td class="space-around">
-                                <span title='ჩასმა' class="pointer icon study-paste"></span>
-                                <span title='შეცვლა' data-id="{{$value->id}}" class="pointer icon study-edit"></span>
-                                <span title='წაშლა' data-id="{{$value->id}}" class="pointer icon study-trash" onclick="deleteRes({{$value->id}})"></span>
+
+                                <span title='ჩასმა' class="pointer paste">
+                                    <img  src="{{asset('css/fonts/paste.svg')}}" alt="">
+                                </span>
+                                <span title='შეცვლა'
+                                      data-id="{{$value->id}}"
+                                      class="pointer edit">
+                                    <img src="{{asset('css/fonts/edit.svg')}}" alt="">
+                                </span>
+                                <span title='წაშლა'
+                                      data-id="{{$value->id}}"
+                                      class="pointer remove"
+                                      onclick="deleteRes({{$value->id}})">
+                                <img  src="{{asset('css/fonts/remove.svg')}}" alt="">
+
+                                </span>
                             </td>
                         </tr>
                     @endforeach

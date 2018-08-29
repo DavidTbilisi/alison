@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Categories;
 use App\Courses;
 use App\Mail\MailClass;
@@ -220,8 +221,6 @@ class HomeController extends Controller
             ]);
     }
 
-
-
     public function uploadShortCourse ($request) {
         $rules = [
             'courseCover' => 'mimes:jpeg,png,jpg,gif',
@@ -346,7 +345,6 @@ class HomeController extends Controller
     }
     //********************************************************
 
-
     //    lessons
     //********************************************************
     public function lesson($course_id,$active = 0)
@@ -418,7 +416,6 @@ class HomeController extends Controller
         }
     }
     //********************************************************
-
 
     //    Resources
     //********************************************************
@@ -496,6 +493,34 @@ class HomeController extends Controller
         return $arr;
     }
     //********************************************************
+
+
+    //    cart
+    public function cart()
+    {
+        $cart = Cart::get($this->all['user'][0]->id);
+        return view('cart-child', ['all'=>$this->all], ['data' => $cart]);
+    }
+    public function addToCart($author_id = 1)
+    {
+        $customer_id = $this->all['user'][0]->id;
+        $cart = new Cart();
+        $cart->course_id = 1;
+        $cart->user_id = $author_id;
+        $cart->customer_id = $customer_id;
+        $cart->days_left = random_int(15,30);
+        $cart->status = 1;
+        $cart->save();
+        redirect(route("cart"));
+    }
+    public function removeFromCart()
+    {
+
+    }
+    public function deleteFromCart()
+    {
+
+    }
 
 
     public function sendMail(Request $request)
