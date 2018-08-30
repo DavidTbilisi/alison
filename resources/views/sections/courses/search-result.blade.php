@@ -8,11 +8,15 @@
                         <p>Alison has over 1000 high quality courses available across 9 distinct categories, all
                             absolutely free to complete. All our courses are self-paced and have been designed by
                             subject matter experts, to give you an interactive and enriched learning experience.</p>
-                        <p>Depending on your learning goal, you can choose from:<br><strong>Certificate courses</strong>
+                        <p>Depending on your learning goal, you can choose from:<br>
+                            <strong>Certificate courses</strong>
                             (average time: 2-3 hours), which help you focus your learning to provide you with specific
-                            expertise in your field or industry.<br><strong>Diploma courses</strong> (average time: 8-10
+                            expertise in your field or industry.<br>
+                            <strong>Diploma courses</strong> (
+                            average time: 8-10
                             hours), which are designed to give you a more extensive understanding of a subject area, by
-                            helping you master multiple concepts within a subject.<br><strong>Learning Paths</strong>
+                            helping you master multiple concepts within a subject.<br>
+                            <strong>Learning Paths</strong>
                             (average time: 18-20 hours), which are a combination of niche courses that have been
                             specially designed by experts, to help you: Broaden your skillset; Progress your knowledge;
                             or Master a subject.</p>
@@ -32,6 +36,7 @@
         </script>
     </div>
     <div class="no-results">Sorry no results</div>
+    {{--todo: ajax - add to cart from here--}}
 
     <ul class="search-items clearfix"></ul>
 
@@ -40,7 +45,6 @@
         <h2>People also search for</h2>
 
 
-{{--აჯაქსი--}}
         <ul class="related-search-list"></ul>
 
 

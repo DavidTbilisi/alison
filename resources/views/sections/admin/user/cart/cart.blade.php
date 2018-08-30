@@ -6,6 +6,7 @@
         <table>
             <thead>
             <tr>
+                <td>#</td>
                 <td>კურსის დასახელება</td>
                 <td>გამოყენების პერიოდი</td>
                 <td>ფასი</td>
@@ -14,12 +15,13 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($data as $row)
+            @foreach ($data as $index=>$row)
             <tr>
+                <td>{{++$index}}</td>
                 <td>{{$row->name}}</td>
-                <td>{{$row->avg_duration}} დღე</td>
-                <td>{{$row->price}} ლარი</td>
-                <td> delete </td>
+                <td>{{(int)$row->avg_duration}} დღე</td>
+                <td>{{(int)$row->price}} ლარი</td>
+                <td><a href="{{route('remove',['id' => $row->course_id]) }}">delete</a> </td>
             </tr>
                 @endforeach
 

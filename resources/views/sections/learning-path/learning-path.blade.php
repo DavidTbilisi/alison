@@ -1395,8 +1395,8 @@
                     <div class="no-results">Sorry no results</div>
 
                     <ul class="search-items clearfix">
-                        {{-- todo: აქაც აჯაქსის სერჩი მუშაობს მუშაობს --}}
-                      @foreach(range(1,10) as $li)
+                        {{-- todo: აქაც აჯაქსის სერჩი მუშაობს  --}}
+                      @foreach(range(1,2) as $li)
                         <li style="opacity: 1;">
                             <div class="course-block">
                                 <div class="course-block-intro">
@@ -1431,7 +1431,7 @@
                                         <div class="course-intro">Accounting professionals can be self-employed or work
                                             for a specific company. Most accountants specialize in a specific ...
                                         </div>
-                                        <button class="btn btn-blue start-button">Start Now</button>
+                                        <button class="btn btn-blue start-button">DVD Now</button>
                                     </a>
                                     <div class="course-stars"><span class="icon-filled-star"></span><span
                                                 class="icon-filled-star"></span><span

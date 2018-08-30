@@ -102,7 +102,7 @@ module.exports = __webpack_require__(3);
 (function ($) {
 
     setTimeout(function () {
-        console.clear();
+        // console.clear();
     }, 2e3);
 
     var view = function () {

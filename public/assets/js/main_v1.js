@@ -3398,7 +3398,7 @@ function checkNotification(){
     }
 
     $.ajax({
-        url: endpoint+'/notification/check/'+sessionId,
+        url: 'http://alison.com'+'/notification/check/'+sessionId,
         type: 'get',
         success: function (data) {
             if(data.result !== false){
@@ -3581,7 +3581,7 @@ function stickyAd(){
 }
 
 if($('.search-results-container').length > 0){
-    var search = new Search();
+    var search = new Search({ads:false});
 
     Lang.get('routes.learning-paths.index', 'learning_path_index', 'learning-path');
     Lang.get('routes.courses.index', 'courses_index', 'courses');

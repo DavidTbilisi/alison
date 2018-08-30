@@ -527,7 +527,7 @@ Start Topic<span class="icon-play"></span>
         <div class="header-bottom">
             <div>
                 <a href="https://alison.com/topic/learn/66913/learning-outcomes" class="lrg-btn en"
-                   title="Learning Outcomes">Start Now<span
+                   title="Learning Outcomes">xxx tart Now<span
                             class="icon-right-arrow move-right arrow"></span></a>
             </div>
         </div>

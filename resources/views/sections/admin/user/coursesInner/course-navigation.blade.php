@@ -31,8 +31,6 @@
             @csrf
             <input type="submit"  class="back-to-modules btn btn-green" value="დამატება">
         </form>
-
-        {{-- todo: connect this page with DB --}}
     </div>
 </div>
 

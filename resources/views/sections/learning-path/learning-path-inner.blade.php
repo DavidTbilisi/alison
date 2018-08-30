@@ -90,7 +90,7 @@
                                     <div class="bottom">
                                         <div class="column">
                                             <a href="https://alison.com/course/fundamentals-of-accounting" class="btn btn-blue" title="Fundamentals of Accounting">
-                                                Start Now </a>
+                                                David Now </a>
                                         </div>
                                     </div>
                                 </div>

@@ -8,18 +8,11 @@ use App\Courses;
 use App\Mail\MailClass;
 use App\OneCourse;
 use App\Resource;
-use App\ShortCourse;
 use App\User;
 use Carbon\Carbon;
-use Faker\Provider\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 
 
 class HomeController extends Controller
@@ -501,8 +494,12 @@ class HomeController extends Controller
         $cart = Cart::get($this->all['user'][0]->id);
         return view('cart-child', ['all'=>$this->all], ['data' => $cart]);
     }
-    public function addToCart($author_id = 1)
+    public function addToCart(Request $request)
     {
+        $author_id = 1;
+        if ($request->method('post')) {
+            dd($request->input());
+        }
         $customer_id = $this->all['user'][0]->id;
         $cart = new Cart();
         $cart->course_id = 1;
@@ -513,16 +510,13 @@ class HomeController extends Controller
         $cart->save();
         redirect(route("cart"));
     }
-    public function removeFromCart()
+    public function removeFromCart($course_id)
     {
-
+        $customer_id = $this->all['user'][0]->id;
+        $cart = Cart::get($customer_id, $course_id);
+        return $cart;
     }
-    public function deleteFromCart()
-    {
-
-    }
-
-
+// TODO: from here
     public function sendMail(Request $request)
     {
         if($request->method('post')) {

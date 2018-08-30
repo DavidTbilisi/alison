@@ -179,7 +179,7 @@
             </div>
             <div class="moving-btn">
                 <a href="https://alison.com/topic/learn/66913/learning-outcomes" class="lrg-btn"
-                   title="Learning Outcomes">Start Now</a>
+                   title="Learning Outcomes">DDD Now</a>
                 <div class="section-shadow"></div>
             </div>
         </article>

@@ -25,7 +25,7 @@
 (function ($){
 
     setTimeout(function(){
-        console.clear();
+        // console.clear();
     },2e3);
 
 

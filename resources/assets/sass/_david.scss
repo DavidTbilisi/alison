@@ -13,7 +13,6 @@ $dark:#2e3942;
   font-family: head, Helvetica;
 }
 
-// todo: custom font
 @for $i from 1 through 6 {
   h#{$i} {
     @extend .headers

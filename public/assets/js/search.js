@@ -11,7 +11,7 @@ function Search(options){
         var options = {};
     }
 
-    options.ads = options.ads || true;
+    options.ads = options.ads || false;
     options.courseCount = options.courseCount || (options['ads'] ? 25 : 30);
     options.page = options.page || 1;
     options.blankCount = options.blankCount || 30;

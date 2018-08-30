@@ -29,6 +29,7 @@ Route::group([ 'prefix' => '/learning-path'], function(){
     Route::get('/', ['as'=>'path','uses'=>'HomeController@learningPath']);
     Route::get('{name?}', ['as'=>'pathName','uses'=>'HomeController@learningPathName']);
 });
+
 Route::group([ 'prefix' => '/admin', 'middleware' => 'MyAuth'], function(){
     Route::get('/', ['as'=>'dashboard','uses'=>'HomeController@dashboard']);
     Route::match(['get','post'],'/setnewpassword', ['as'=>'setNewPassword','uses'=>'HomeController@setNewPassword']);
@@ -52,8 +53,8 @@ Route::group([ 'prefix' => '/admin', 'middleware' => 'MyAuth'], function(){
     });
     Route::group(['prefix' => '/cart'], function (){
         Route::match(['get','post'],'/',['as' => 'cart', 'uses' => 'HomeController@cart']);
-        Route::match(['get','post'],'/add',['as' => 'cart', 'uses' => 'HomeController@addToCart']);
-        Route::match(['get','post'],'/remove',['as' => 'cart', 'uses' => 'HomeController@removeFromCart']);
+        Route::match(['get','post'],'/add',['as' => 'add', 'uses' => 'HomeController@addToCart']);
+        Route::match(['get','post'],'/remove/{id}',['as' => 'remove', 'uses' => 'HomeController@removeFromCart']);
 
     });
 
