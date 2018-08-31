@@ -33,9 +33,6 @@ class AppServiceProvider extends ServiceProvider
             return "<?php } ?>";
         });
 
-        Blade::directive('clog', function ($data, $context="PHP: ") {
-            return "<script> console.log('{$context}', ".json_encode($data).") </script>";
-        });
     }
 
     /**
