@@ -48,16 +48,15 @@ Route::group([ 'prefix' => '/admin', 'middleware' => 'MyAuth'], function(){
         Route::match(['get','post'],'addRes/',['as' => 'addres', 'uses' => 'HomeController@addResource']);
         Route::match(['get','post'],'editRes/{id?}',['as' => 'editres', 'uses' => 'HomeController@editResource']);
         Route::match(['get','post'],'deleteRes/{id?}',['as' => 'deleteres', 'uses' => 'HomeController@deleteResource']);
-
-
     });
     Route::group(['prefix' => '/cart'], function (){
         Route::match(['get','post'],'/',['as' => 'cart', 'uses' => 'HomeController@cart']);
         Route::match(['get','post'],'/add',['as' => 'add', 'uses' => 'HomeController@addToCart']);
         Route::match(['get','post'],'/remove/{id}',['as' => 'remove', 'uses' => 'HomeController@removeFromCart']);
-
     });
-
+    Route::group(['prefix' => '/bought'], function (){
+        Route::match(['get','post'],'/',['as' => 'bought', 'uses' => 'HomeController@bought']);
+    });
 });
 
 

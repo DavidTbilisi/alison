@@ -54,7 +54,7 @@
 
 
     var octopus = (function (v){
-
+        console.dir(v.plugins.test);
         // Functions
         var route = function() {
             var args = Array.prototype.slice.call(arguments);

@@ -26,7 +26,7 @@
                     <td>{{$row->name}}</td>
                     <td>{{(int)$row->avg_duration}} დღე</td>
                     <td>{{(int)$row->price}} ლარი</td>
-                    <td><a href="{{route('remove',['id' => $row->course_id]) }}">delete <img src="{{asset('css/fonts/remove.svg')}}" alt=""></a></td>
+                    <td><a href="{{route('remove',['id' => $row->course_id]) }}"> delete <img src="{{asset('css/fonts/remove.svg')}}" alt=""></a></td>
                 </tr>
             @endforeach
             <tr>

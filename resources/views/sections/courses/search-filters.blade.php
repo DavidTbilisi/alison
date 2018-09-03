@@ -11,7 +11,6 @@
                     <h2>Refine your Search</h2>
                     <h3>Categories</h3>
                     <ul>
-
                         <li class="health-category">
                             <a class="category-cancel" title="Health" href="{{route('home')}}/courses/health">
                                 <div class="category-link-inner">
@@ -26,7 +25,8 @@
                                        href="{{route('home')}}/courses/mental-health">
                                         <div class="category-link-inner">
                                             <input class="category child-category" id="mental-health" type="checkbox"
-                                                   name="mental-health">
+                                                   name="1-5">
+                                            {{--TODO: search --}}
                                             <label for="mental-health">Mental Health</label>
                                         </div>
                                     </a>

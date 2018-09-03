@@ -4285,7 +4285,7 @@ function Course(){
                 courseUrl = abs_url + '/' + translations['resume'] +'/'+ id;
             }
         }
-
+        // TODO: add to cart;
         var html =  '<div class="course-block">'+
                         '<div class="course-block-intro">'+
                             // This is the share and favourite section
@@ -4308,7 +4308,7 @@ function Course(){
                                 '<div class="course-intro">' +
                                     (headline.length > 120 ? headline.substring(0, 120)+'...' : headline) +
                                 '</div>'+
-                                    '<button class="btn btn-blue start-button">Start Now</button>'+
+                                    '<button class="btn btn-blue start-button"> ყიდვა </button>'+
                             '</a>' +
                             this.createStars(parseInt(course.rating) || 4);
 

@@ -25,5 +25,8 @@
     "deletelesson": "admin\/courses\/deletelesson\/{id?}",
     "addres": "admin\/courses\/addRes",
     "editres": "admin\/courses\/editRes\/{id?}",
-    "deleteres": "admin\/courses\/deleteRes\/{id?}"
+    "deleteres": "admin\/courses\/deleteRes\/{id?}",
+    "cart": "admin\/cart",
+    "add": "admin\/cart\/add",
+    "remove": "admin\/cart\/remove\/{id}"
 }

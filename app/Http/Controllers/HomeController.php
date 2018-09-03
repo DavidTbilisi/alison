@@ -516,6 +516,14 @@ class HomeController extends Controller
         $cart = Cart::get($customer_id, $course_id);
         return $cart;
     }
+
+    // bought- courses
+    public function bought()
+    {
+        return view('bought_courses-child',['all'=>$this->all]);
+    }
+
+
 // TODO: from here
     public function sendMail(Request $request)
     {

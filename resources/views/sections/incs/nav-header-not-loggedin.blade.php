@@ -81,14 +81,7 @@
                         <span class="icon-chevron-down"></span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('path')}}" title="Learning Paths">
-                        <span>Learning Paths</span>
-                    </a>
-                </li>
             </ul>
-
-
             <div class="wide-dd-container categories-container dd-menu">
                 <div class="wide-dd-container-inner">
                     <ul>
