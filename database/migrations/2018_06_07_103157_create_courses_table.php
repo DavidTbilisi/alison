@@ -13,23 +13,7 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-//        Schema::create('courses', function (Blueprint $table) {
-//            $table->increments('id');
-//            $table->integer('level');
-//            $table->integer('status');
-//            $table->string('name',250);
-//            $table->text('description');
-//            $table->string('moreInfoLink', 250);
-//            $table->string('resumeLink', 250);
-//            $table->string('image', 250);
-//            $table->string('category', 150);
-//            $table->string('type', 100);
-//            $table->string('tag',250);
-//            $table->string('duration', 50);
-//            $table->string('features', 50);
-//            $table->string('learningarea', 100);
-//            $table->timestamps();
-//        });
+
 
         Schema::create('courses', function (Blueprint $table){
             $table->increments('id');
@@ -37,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->integer('course_type_id');
             $table->integer('author_id');
             $table->integer('price');
+            $table->integer('old_price');
             $table->integer("trending")->nullable();
             $table->integer("responsive")->nullable();
             $table->string("avg_duration", 50)->nullable();

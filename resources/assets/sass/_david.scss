@@ -83,6 +83,36 @@ $dark:#2e3942;
   }
 }
 
+.search-items{
+  .course-block-intro{
+    .btn.btn-blue.start-button{
+      font-size:1.3rem;
+    }
+    .course-stars{
+      margin: -15px 0 10px 0;
+    }
+    h4,h5{
+      margin: 0;
+      &:first-of-type{
+        margin-top:15px;
+        text-decoration:line-through;
+        color:gray;
+      }
+    }
+    .more-info{
+      background-color: dimgrey;
+      color: white;
+      display: inline-block;
+      padding: 0.6rem;
+      border-radius: 4px;
+      text-shadow: -1px 1px 5px black;
+      box-shadow: inset 0px 1px 9px -3px black;
+      border: 2px solid white;
+    }
+  }
+}
+
+
 
 .add-course-wrapper {
   padding: 5rem;

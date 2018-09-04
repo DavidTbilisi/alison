@@ -122,6 +122,38 @@ h6,
   margin: 0 auto;
 }
 
+.search-items .course-block-intro .btn.btn-blue.start-button {
+  font-size: 1.3rem;
+}
+
+.search-items .course-block-intro .course-stars {
+  margin: -15px 0 10px 0;
+}
+
+.search-items .course-block-intro h4,
+.search-items .course-block-intro h5 {
+  margin: 0;
+}
+
+.search-items .course-block-intro h4:first-of-type,
+.search-items .course-block-intro h5:first-of-type {
+  margin-top: 15px;
+  text-decoration: line-through;
+  color: gray;
+}
+
+.search-items .course-block-intro .more-info {
+  background-color: dimgrey;
+  color: white;
+  display: inline-block;
+  padding: 0.6rem;
+  border-radius: 4px;
+  text-shadow: -1px 1px 5px black;
+  -webkit-box-shadow: inset 0px 1px 9px -3px black;
+          box-shadow: inset 0px 1px 9px -3px black;
+  border: 2px solid white;
+}
+
 .add-course-wrapper {
   padding: 5rem;
   font-size: 1.2rem;

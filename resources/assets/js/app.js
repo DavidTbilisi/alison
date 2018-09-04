@@ -54,8 +54,9 @@
 
 
     var octopus = (function (v){
-        console.dir(v.plugins.test);
         // Functions
+
+        //
         var route = function() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -68,6 +69,9 @@
                     .map(s => s[0] == '{' ? args.shift() : s)
                     .join('/');
             }};
+
+
+
         function del(page, id, redirect){
             jQuery.ajax({
                 url:route(page,id),

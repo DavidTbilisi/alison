@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Bought;
 use App\Categories;
 use App\Courses;
 use App\Mail\MailClass;
@@ -488,40 +488,36 @@ class HomeController extends Controller
     //********************************************************
 
 
-    //    cart
-    public function cart()
+    // bought- courses
+    public function bought()
     {
-        $cart = Cart::get($this->all['user'][0]->id);
-        return view('cart-child', ['all'=>$this->all], ['data' => $cart]);
+        $bought = Bought::get($this->all['user'][0]->id);
+        return view('cart-child', ['all'=>$this->all], ['data' => $bought]);
     }
-    public function addToCart(Request $request)
+    public function addToBought(Request $request)
     {
         $author_id = 1;
         if ($request->method('post')) {
             dd($request->input());
         }
         $customer_id = $this->all['user'][0]->id;
-        $cart = new Cart();
-        $cart->course_id = 1;
-        $cart->user_id = $author_id;
-        $cart->customer_id = $customer_id;
-        $cart->days_left = random_int(15,30);
-        $cart->status = 1;
-        $cart->save();
-        redirect(route("cart"));
+        $bought = new Bought();
+        $bought->course_id = 1;
+        $bought->user_id = $author_id;
+        $bought->customer_id = $customer_id;
+        $bought->days_left = random_int(15,30);
+        $bought->status = 1;
+        $bought->save();
+        redirect(route("bought"));
     }
-    public function removeFromCart($course_id)
+    public function removeFromBought($course_id)
     {
         $customer_id = $this->all['user'][0]->id;
-        $cart = Cart::get($customer_id, $course_id);
-        return $cart;
+        $bought = Bought::get($customer_id, $course_id);
+        return $bought;
     }
 
-    // bought- courses
-    public function bought()
-    {
-        return view('bought_courses-child',['all'=>$this->all]);
-    }
+
 
 
 // TODO: from here

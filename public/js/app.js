@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(3);
 
 
 /***/ }),
@@ -127,8 +127,9 @@ module.exports = __webpack_require__(4);
     }();
 
     var octopus = function (v) {
-        console.dir(v.plugins.test);
         // Functions
+
+        //
         var route = function route() {
             var args = Array.prototype.slice.call(arguments);
             var name = args.shift();
@@ -141,6 +142,7 @@ module.exports = __webpack_require__(4);
                 }).join('/');
             }
         };
+
         function del(page, id, redirect) {
             jQuery.ajax({
                 url: route(page, id),
@@ -276,8 +278,7 @@ module.exports = __webpack_require__(4);
 module.exports = {"":"api/user","home":"/","addCategory":"addCategory","search":"search","login":"login","register":"register","reset":"reset","courses":"courses","certificate":"courses/certificate","diploma":"courses/diploma","about":"courses/{name?}","path":"learning-path","pathName":"learning-path/{name?}","dashboard":"admin","setNewPassword":"admin/setnewpassword","logout":"admin/logout","admincourses":"admin/courses","addcourse":"admin/courses/add","edit":"admin/courses/edit/{id}","delete":"admin/courses/delete/{id}","lesson":"admin/courses/{course_id}/lesson/{id?}","addlesson":"admin/courses/addlesson","editlesson":"admin/courses/editlesson/{id?}","deletelesson":"admin/courses/deletelesson/{id?}","addres":"admin/courses/addRes","editres":"admin/courses/editRes/{id?}","deleteres":"admin/courses/deleteRes/{id?}","cart":"admin/cart","add":"admin/cart/add","remove":"admin/cart/remove/{id}"}
 
 /***/ }),
-/* 3 */,
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

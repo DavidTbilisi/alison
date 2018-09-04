@@ -26,12 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+// this user has many courses
+// is author of may courses
     public function courses()
     {
      return $this->hasMany(Courses::class, 'author_id');
     }
-
+// this user has many resources
     public function resource()
     {
      return $this->hasMany(Resource::class, 'user_id');

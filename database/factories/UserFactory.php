@@ -13,33 +13,6 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
-    ];
-});
-
-
-
-//$factory->define(App\Categories::class, function (Faker $faker) {
-//    return [
-//        'root_id' => '',
-//        'possition' => '',
-//        'status' => '',
-//        'user_id' => '',
-//        'title' => '',
-//        'url' => '',
-//        'navUrl' => '',
-//        'color' => '',
-//        'image' => ''
-//    ];
-//});
-
-
-
 $factory->define(App\Courses::class, function (Faker $faker) {
     $parentCategories= ["Health", "Business", "Humanities", "IT", "Language", "Lifestyle", "Marketing", "Math", "Science"];
     $environment= ["academic","workpalce","personal development"];
@@ -52,6 +25,7 @@ $factory->define(App\Courses::class, function (Faker $faker) {
     'course_type_id' => $faker->numberBetween(0,1) ,
     'author_id' => $faker->numberBetween(1,3) ,
     'price' => $faker->numberBetween(10,30) ,
+    'old_price' => $faker->numberBetween(10,30) ,
     "trending" => $faker->numberBetween(0,1) ,
     "responsive" => $faker->numberBetween(0,1) ,
     "avg_duration" => '2 - 5 საათამდე' ,
@@ -77,7 +51,6 @@ $factory->define(App\Courses::class, function (Faker $faker) {
     "points" => $faker-> randomDigit,
     ];
 });
-
 $factory->define(App\Cta::class, function (Faker $faker) {
     return [
         'id' => null,
@@ -89,8 +62,6 @@ $factory->define(App\Cta::class, function (Faker $faker) {
 
     ];
 });
-
-
 $factory->define(App\Resource::class, function (Faker $faker) {
     return [
         'id' => null,
@@ -102,7 +73,6 @@ $factory->define(App\Resource::class, function (Faker $faker) {
         'res_link' =>  "https://picsum.photos/400/500/?".random_int(10,200),
     ];
 });
-
 $factory->define(App\OneCourse::class, function (Faker $faker) {
     return [
         'id' => null,
