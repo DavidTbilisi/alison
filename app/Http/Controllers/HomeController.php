@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bought;
+use App\Cart;
 use App\Categories;
 use App\Courses;
 use App\Mail\MailClass;
@@ -517,8 +518,27 @@ class HomeController extends Controller
         return $bought;
     }
 
+    // cart
+    public function cart()
+    {
+        $data = Cart::where('ip',request()->ip())->get();
+        foreach ($data as $cart){
+            $data_s[] = $cart->courses;
+        }
+        foreach ($data_s as $dav):
+        dump($dav[0]->name);
+        endforeach;
+        return view('cart-child', ['all' => $this->all, 'data' => $data_s]);
+    }
+    public function addToCart()
+    {
+        return 'add to cart is empty';
+    }
 
-
+    public function removeFromCart()
+    {
+        return 'remove from cart is empty';
+    }
 
 // TODO: from here
     public function sendMail(Request $request)

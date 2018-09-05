@@ -19,6 +19,7 @@
             </thead>
             <tbody>
             @php($whole_price = 0)
+@dd($data)
             @foreach ($data as $index=>$row)
                 <tr>
                     @php($whole_price += (int)$row->price)

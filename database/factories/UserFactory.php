@@ -83,3 +83,10 @@ $factory->define(App\OneCourse::class, function (Faker $faker) {
         'text' =>  $faker->sentence(random_int(3,5), true),
     ];
 });
+$factory->define(App\Cart::class, function (Faker $faker){
+    return[
+        'id' => null,
+        'ip' => $faker->ipv4,
+        'course_id' => random_int(1,10),
+    ];
+});

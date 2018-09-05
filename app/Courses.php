@@ -56,4 +56,8 @@ class Courses extends Model
         return $this->hasMany(Resource::class, "course_id");
 
     }
+
+    public function cart () {
+        return $this->hasMany(Cart::class, 'course_id', 'id');
+    }
 }
