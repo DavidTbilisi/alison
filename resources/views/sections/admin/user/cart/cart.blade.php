@@ -19,22 +19,31 @@
             </thead>
             <tbody>
             @php($whole_price = 0)
-@dd($data)
+
+            {{--just console.log javascript--}}
+            @inject('clog', "App\Helpers\BrowserConsole")
+            @php( $clog->log($data, 'view gets this data') )
+
             @foreach ($data as $index=>$row)
+
                 <tr>
                     @php($whole_price += (int)$row->price)
                     <td>{{++$index}}</td>
                     <td>{{$row->name}}</td>
                     <td>{{(int)$row->avg_duration}} დღე</td>
                     <td>{{(int)$row->price}} ლარი</td>
-                    <td><a href="{{route('remove',['id' => $row->course_id]) }}"> delete <img src="{{asset('css/fonts/remove.svg')}}" alt=""></a></td>
+                    <td><a href="{{route('remove',['id' => $row->id]) }}">
+                            delete
+                            <img src="{{asset('css/fonts/remove.svg')}}" alt="remove">
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             <tr>
                 <td>სულ</td>
                 <td></td>
                 <td></td>
-                <td>{{$whole_price}} ლარი</td>
+                <td> {{$whole_price}} ლარი </td>
                 <td></td>
             </tr>
             </tbody>
@@ -48,7 +57,8 @@
         </a>
     </div>
 <div class="go-back">
-    {{--@dd(url())--}}
+    {{--should be changed--}}
+    {{--todo: link not working correctly--}}
     <a href="{{url()->previous()}}"> წინა გვერდი </a>
 </div>
 </div>

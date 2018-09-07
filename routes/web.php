@@ -51,6 +51,7 @@ Route::group([ 'prefix' => '/admin', 'middleware' => 'MyAuth'], function(){
     });
     Route::group(['prefix' => '/cart'], function (){
         Route::match(['get','post'],'/',['as' => 'cart', 'uses' => 'HomeController@cart']);
+        Route::match(['get','post'],'/count/{isjson?}',['as' => 'cartcount', 'uses' => 'HomeController@cart']);
         Route::match(['get','post'],'/add',['as' => 'add', 'uses' => 'HomeController@addToCart']);
         Route::match(['get','post'],'/remove/{id}',['as' => 'remove', 'uses' => 'HomeController@removeFromCart']);
     });

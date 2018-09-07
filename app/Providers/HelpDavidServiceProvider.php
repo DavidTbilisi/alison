@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Helpers\BrowserConsole;
-use App\Helpers\Contracts\David_i;
+use App\Helpers\Contracts\Dconsole;
 use function foo\func;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +26,7 @@ class HelpDavidServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(David_i::class, function(){
+        $this->app->bind(Dconsole::class, function(){
             return new BrowserConsole();
         });
     }

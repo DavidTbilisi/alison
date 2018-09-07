@@ -58,6 +58,6 @@ class Courses extends Model
     }
 
     public function cart () {
-        return $this->hasMany(Cart::class, 'course_id', 'id');
+        return $this->belongsto(Cart::class, 'course_id', 'id');
     }
 }

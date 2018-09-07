@@ -6,6 +6,7 @@ use App\Bought;
 use App\Cart;
 use App\Categories;
 use App\Courses;
+use App\Helpers\Contracts\Dconsole;
 use App\Mail\MailClass;
 use App\OneCourse;
 use App\Resource;
@@ -26,6 +27,7 @@ class HomeController extends Controller
             'allCategories' => Categories::allCategories(),
             'subCategories' => Categories::subCategories(1),
             'allCats' => Categories::activeCategories(),
+            'cartCount' => Cart::getAll(true),
          ];
         $this->middleware(function ($request, $next) {
             $this->all['user'] =  User::where("id",session('user_id'))->get();
@@ -489,7 +491,7 @@ class HomeController extends Controller
     //********************************************************
 
 
-    // bought- courses
+    // bought-courses
     public function bought()
     {
         $bought = Bought::get($this->all['user'][0]->id);
@@ -519,25 +521,30 @@ class HomeController extends Controller
     }
 
     // cart
-    public function cart()
+    public function cart(Dconsole $david_i, $isJson=null)
     {
-        $data = Cart::where('ip',request()->ip())->get();
-        foreach ($data as $cart){
-            $data_s[] = $cart->courses;
+        $data = Cart::getAll();
+        if ($isJson == true){
+            return Cart::getAll(true);
+        } else {
+            return view('cart-child', ['all' => $this->all, 'data' => $data]);
         }
-        foreach ($data_s as $dav):
-        dump($dav[0]->name);
-        endforeach;
-        return view('cart-child', ['all' => $this->all, 'data' => $data_s]);
-    }
-    public function addToCart()
-    {
-        return 'add to cart is empty';
     }
 
-    public function removeFromCart()
+    public function addToCart(Dconsole $d)
     {
-        return 'remove from cart is empty';
+        $cart = new Cart();
+        $cart->ip = request()->ip();
+        $cart->course_id = request()->input('id');
+        $cart->save();
+        return $cart;
+    }
+    public function removeFromCart(Dconsole $d, $id)
+    {
+            $cart = Cart::where('course_id',$id)->first();
+            $cart->delete();
+
+            return redirect(route('cart'));
     }
 
 // TODO: from here
@@ -704,3 +711,6 @@ class HomeController extends Controller
         }
     }
 }
+
+
+

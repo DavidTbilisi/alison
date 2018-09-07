@@ -194,7 +194,7 @@
 <span data-endpoint="https://api.alison.com/v0.1" class="number position update-notification-amount">0</span>
 <span class="icon-bell-line"></span>
 </a>
-<a href="#" class="cart" title="Shop">
+<a href="{{route('cart')}}" class="cart" title="Shop">
 <span class="number position update-order-amount">0</span>
 <span class="icon-cart"></span>
 </a>
@@ -265,10 +265,10 @@
                     <div class="orders-popup-product">
                         <p>You have nothing in your cart. <br>Why not add something?</p>
                     </div>
-                    <a class="btn btn-blue" href="https://alison.com/shop">Shop</a>
+                    <a class="btn btn-blue" href="{{route('cart')}}">Shop</a>
                 </div>
             </div>
-            <div class="order-amount-header" style="display: none">0</div>
+            <div class="order-amount-header" style="display: none">{{$all['cartCount']}}</div>
         </div>
     </div>
 </header>

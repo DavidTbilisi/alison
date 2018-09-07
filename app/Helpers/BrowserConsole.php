@@ -7,14 +7,17 @@
  */
 
 namespace App\Helpers;
-use App\Helpers\Contracts\David_i;
+use App\Helpers\Contracts\Dconsole;
 use Illuminate\Http\Request;
 
-class BrowserConsole implements David_i
+class BrowserConsole implements Dconsole
 {
     public static function log($data, $context="PHP: "){
-        $obj = new self();
         echo "<script> console.log('{$context}', ".json_encode($data) .") </script>";
+    }
+    public static function ld($data, $context="PHP: "){
+        echo "<script> console.log('{$context}', ".json_encode($data) .") </script>";
+        die;
     }
 
 }

@@ -1175,32 +1175,32 @@ var translations = [],
         },
         init: function() {
             var that = this;
-
-            $.ajax({
-                url: 'https://api.alison.com/v0.1/translations/multiple',
-                type: 'HEAD',
-                contentType: 'application/json',
-                success: function(data, textStatus, request) {
-                    // Get timestamp
-                    if (request.getResponseHeader('Last-Modified')) {
-                        var time = Math.floor(new Date(request.getResponseHeader('Last-Modified')) / 1000);
-
-                        if (getLsItem("updated_at") && time > parseInt(getLsItem("updated_at"))) {
-                            setLsItem("updated_at", that.opts.runAt)
-                            that.opts.ignoreLs = true;
-                        }
-                    }
-                },
-                error: function(error, textStatus) {
-                    if (textStatus === "timeout") {
-                        var updatedAt = getLsItem("updated_at");
-
-                        if (updatedAt && (parseInt(updatedAt) - that.opts.runAt > 86400)) {
-                            that.opts.ignoreLs = true;
-                        }
-                    }
-                }
-            });
+// todo: სავარაუდოდ ენები...
+            // $.ajax({
+            //     url: 'https://api.alison.com/v0.1/translations/multiple',
+            //     type: 'HEAD',
+            //     contentType: 'application/json',
+            //     success: function(data, textStatus, request) {
+            //         // Get timestamp
+            //         if (request.getResponseHeader('Last-Modified')) {
+            //             var time = Math.floor(new Date(request.getResponseHeader('Last-Modified')) / 1000);
+            //
+            //             if (getLsItem("updated_at") && time > parseInt(getLsItem("updated_at"))) {
+            //                 setLsItem("updated_at", that.opts.runAt)
+            //                 that.opts.ignoreLs = true;
+            //             }
+            //         }
+            //     },
+            //     error: function(error, textStatus) {
+            //         if (textStatus === "timeout") {
+            //             var updatedAt = getLsItem("updated_at");
+            //
+            //             if (updatedAt && (parseInt(updatedAt) - that.opts.runAt > 86400)) {
+            //                 that.opts.ignoreLs = true;
+            //             }
+            //         }
+            //     }
+            // });
 
             return;
         },
@@ -1641,7 +1641,7 @@ $(document).ready(function() {
     $(document).on('click', '.cert-order-link-popup', function(e) {
         e.preventDefault();
         $(this).parent().find('.slide-up-products').addClass('view');
-        //$(this).siblings().toggleClass('view');
+        $(this).siblings().toggleClass('view');
     });
 
     dashboardProgressBar();
@@ -5336,9 +5336,12 @@ function Course() {
             '<li>';
 
         if (typeof course.type_name === 'undefined') {
-            html += '<a href="#" class="favorite-course" data-id="' + id + '" title="Favourite this course">' +
-                '<span class="icon-heart2"></span>' +
-                '</a>';
+            // html += '<a href="#" class="favorite-course" data-id="' + id + '" title="Favourite this course">' +
+            //     '<span class="icon-heart2"></span>' +
+            //     '</a>';
+            html += '<a href="#" class="icon" data-id="' + course.id + '" title="Add to cart">' +
+                '<span class="icon study-cart-white"></span>' +
+                '</a>'
         }
 
         html += '</li>' +
@@ -5354,8 +5357,8 @@ function Course() {
             '<button class="btn btn-blue start-button"> ყიდვა  <span class="icon study-pay"></span></button>' +
             '</a>';
 
-        html += ' <h5> 50 ლარი </h5>';
-        html += ' <h5> 50 ლარი </h5>';
+        html += ' <h5>' +course.old_price+' ლარი </h5>';
+        html += ' <h5>' +course.price+' ლარი </h5>';
 
         if (typeof course.type_name === 'undefined') {
             html += '<a class="more-info" href="'
@@ -5500,19 +5503,19 @@ function NewLookCourses(options) {
 
         switch (endpoint) {
             case 'trending':
-                endpoint = this.options.trending
+                endpoint = this.options.trending;
                 break;
             case 'enrolled':
-                endpoint = this.options.enrolled
+                endpoint = this.options.enrolled;
                 break;
             case 'released':
-                endpoint = this.options.released
+                endpoint = this.options.released;
                 break;
             case 'suggested':
-                endpoint = this.options.suggested
+                endpoint = this.options.suggested;
                 break;
             case 'certified':
-                endpoint = this.options.certified
+                endpoint = this.options.certified;
                 break;
             default:
                 endpoint = this.options.popular

@@ -6,7 +6,11 @@
     <!--navend-->
 @endsection
 @section('courses')
-    @include('sections.admin.user.cart.cart')
+    @if($data < 1)
+        @include('sections.admin.user.cart.cart-empty')
+    @else
+        @include('sections.admin.user.cart.cart')
+    @endif
 @endsection
 
 @section('footer-menu')

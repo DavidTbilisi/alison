@@ -37,6 +37,8 @@
     <link rel="font/woff2"  href="{{asset('assets/css/fonts/bpg-mrgvlovani-caps-webfont.woff2')}}">
     <link rel="font/woff2"  href="{{asset('assets/css/fonts/bpg-mrgvlovani-caps-webfont.woff2')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    {{--todo: fontstic should be changed to something--}}
     <link href="https://file.myfontastic.com/dW8FBkf9MMXeppNqs4aKXa/icons.css" rel="stylesheet">
     <script>
         window.dataLayer = window.dataLayer || [];

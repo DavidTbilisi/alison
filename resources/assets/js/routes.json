@@ -27,6 +27,8 @@
     "editres": "admin\/courses\/editRes\/{id?}",
     "deleteres": "admin\/courses\/deleteRes\/{id?}",
     "cart": "admin\/cart",
+    "cartcount": "admin\/cart\/count\/{isjson?}",
     "add": "admin\/cart\/add",
-    "remove": "admin\/cart\/remove\/{id}"
+    "remove": "admin\/cart\/remove\/{id}",
+    "bought": "admin\/bought"
 }
